@@ -1,0 +1,22 @@
+[
+	{
+		"question":"Paljon tekee 2+1?",
+		"answerOptions":
+		[
+		{"option": 2},
+		{"option": 3},
+		{"option": 5}
+		],
+		"rightAnswer": 3
+	},
+	{
+		"question":"Mikä seuraavista on tunnettu autonmerkki?",
+		"answerOptions":
+		[
+		{"option": "sony"},
+		{"option": "merce"},
+		{"option": "toyota"}
+		],
+		"rightAnswer": "toyota"
+	}
+]
