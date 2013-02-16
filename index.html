@@ -2,70 +2,79 @@
 <html>
 	<head>
 		<meta charset="utf-8" />
-		<title>Taloudellinenajo</title>
+		<title>Ajatko taloudellisesti?</title>
 		<link rel="stylesheet" href="style.css" />
 		<script src="js/jquery.min.js"></script>
 	</head>
 	<body>
+		<h2>Ajatko taloudellisesti?</h2>
 		<div id="startScreen">
 			<button id="startButton" onclick="startGame()">Start</button>
 		</div>
 		<div id="gameScreen">
 			<div id="question"></div>
 			<div id="answerOptions"></div>
+			<div id="fuelStatus" style="border: 1px solid #184161; width: 100%;">
+				<div style="width: 100%; background-color: #90E050; text-align: center; border-right: 1px solid #006600;">100%</div>
+			</div>
 		</div>
+		<div id="result"></div>
 		<script type="text/javascript">
+			var questNum;
+			var correctAnswers;
+			var fuel;
+
 			$(function(){
 				$("#gameScreen").hide();
 			});
 
 			function startGame(){
 				$("#startScreen").hide();
+				$("#result").hide();
 				$("#gameScreen").show();
-				buildQuestion();
+				questNum = -1;
+				correctAnswers = 0;
+				fuel = 100;
+				getQuestion();
 			}
 
-			function getQuestion(num, i){
+			function getQuestion(){
+				questNum++;
 				var a = 0;
+				$("#answerOptions").empty();
 				$.getJSON("questions.json", function(data){
-					//console.log(data[0].question);
-					$("#question").text(data[num].question);
-					while (data[num].answerOptions.length > a) {
-						$("<button>", {
-						"text": data[num].answerOptions[a].option,
-						"class": "answerOption"
-						}).appendTo("#answerOptions");
+					console.log("qNum: "+questNum);
+					$("#question").text(data[questNum].question);
+					while (data[questNum].answerOptions.length > a) {
+						/*$("<button>", {
+						"text": data[questNum].answerOptions[a].option,
+						"class": "answerOption",
+						click: function() {
+							console.log(data[questNum].answerOptions[a].option+" : "+data[questNum].rightAnswer);
+							checkAnswer(data[questNum].answerOptions[a].option, data[questNum].rightAnswer);
+						}
+						}).appendTo("#answerOptions");*/
+						$("#answerOptions").append('<button class="answerOption"	onclick="checkAnswer(\''+data[questNum].answerOptions[a].option+'\', \''+data[questNum].rightAnswer+'\')">'+data[questNum].answerOptions[a].option+'</button>');
 						a++;
 					}
 				});
 			}
 
-			function buildQuestion(){
-				var i = 0;
-				getQuestion(i);
-
-				/*$("#question").text("Kysymys1");
-				var rightAnswer = 2; // Get first right answer
-
-				for (i=1;i<4;i++) {
-					var option = i;
-					$("<button>", {
-						"class": "answerOption",
-						"text": i+". Vastausvaihtoehto",
-						"click": function(){
-							selectedAnswer(option, rightAnswer);
-						}
-					}).appendTo("#answerOptions");
-				}*/
-			}
-
-			function selectedAnswer(value, rightAnswer) {
-				if (value == rightAnswer) {
-					console.log("correct");
+			function checkAnswer(playerAnswer, rightAnswer) {
+				console.log(playerAnswer+" == "+rightAnswer);				
+				if (playerAnswer == rightAnswer && fuel > 0) {
+					correctAnswers++;
+					console.log("correct :"+(questNum+1)+"/"+correctAnswers);
+					getQuestion();
 				} else {
-					console.log("failed");
+					fuel -= 10;
+					$("#fuelStatus").html('<div id="fuelStatus" style="width: '+fuel+'%; background-color: #90E050; text-align: center; border-right: 1px solid #006600;">'+fuel+'</div>');
+					console.log("failed, fuel: "+fuel);
+					getQuestion();
+					/*$("#startScreen").hide();
+					$("#gameScreen").hide();
+					$("#result").show().text("Loppu");*/
 				}
-				console.log(value+" == "+rightAnswer);
 			}
 			
 		</script>
