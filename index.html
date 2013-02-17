@@ -9,33 +9,53 @@
 	<body>
 		<h2>Ajatko taloudellisesti?</h2>
 		<div id="startScreen">
-			<button id="startButton" onclick="startGame()">Start</button>
+			<button id="startButton" onclick="startGame()">Aloita</button>
 		</div>
 		<div id="gameScreen">
 			<div id="question"></div>
 			<div id="answerOptions"></div>
 			<div id="fuelStatus" style="border: 1px solid #184161; width: 100%;">
-				<div style="width: 100%; background-color: #90E050; text-align: center; border-right: 1px solid #006600;">100%</div>
+				
 			</div>
 		</div>
-		<div id="result"></div>
+		<div id="resultScreen">
+			Game Over
+			<button id="startButton" onclick="startGame()">Kokeile uudelleen</button>
+		</div>
 		<script type="text/javascript">
 			var questNum;
 			var correctAnswers;
 			var fuel;
+			var timer;
 
 			$(function(){
 				$("#gameScreen").hide();
+				$("#resultScreen").hide();
 			});
 
 			function startGame(){
 				$("#startScreen").hide();
-				$("#result").hide();
+				$("#resultScreen").hide();
 				$("#gameScreen").show();
 				questNum = -1;
 				correctAnswers = 0;
-				fuel = 100;
+				fuel = 50;
+				startTimer();
+				$("#fuelStatus").html('<div style="width: 50%; background-color: #90E050; text-align: center; border-right: 1px solid #006600;">50%</div>');
 				getQuestion();
+			}
+
+			function startTimer() {
+				timer=self.setInterval(function(){watchTime()},1000);
+			}
+
+			function watchTime() {
+				console.log("watchTime");
+				fuel-=2;
+				updateFuel(fuel);
+				if (fuel < 0) {
+					endGame();
+				}
 			}
 
 			function getQuestion(){
@@ -64,17 +84,27 @@
 				console.log(playerAnswer+" == "+rightAnswer);				
 				if (playerAnswer == rightAnswer && fuel > 0) {
 					correctAnswers++;
+					fuel+=10;
+					updateFuel(fuel);
 					console.log("correct :"+(questNum+1)+"/"+correctAnswers);
 					getQuestion();
 				} else {
-					fuel -= 10;
-					$("#fuelStatus").html('<div id="fuelStatus" style="width: '+fuel+'%; background-color: #90E050; text-align: center; border-right: 1px solid #006600;">'+fuel+'</div>');
+					fuel-=10;
+					updateFuel(fuel);
 					console.log("failed, fuel: "+fuel);
-					getQuestion();
-					/*$("#startScreen").hide();
-					$("#gameScreen").hide();
-					$("#result").show().text("Loppu");*/
+					var end = (fuel > 0) ? getQuestion() : endGame();
 				}
+			}
+
+			function updateFuel(f) {
+				$("#fuelStatus").html('<div id="fuelStatus" style="width: '+f+'%; background-color: #90E050; text-align: center; border-right: 1px solid #006600;">'+f+'%</div>');
+			}
+
+			function endGame() {
+				$("#startScreen").hide();
+				$("#gameScreen").hide();
+				$("#resultScreen").show();
+				timer=window.clearInterval(timer);
 			}
 			
 		</script>
