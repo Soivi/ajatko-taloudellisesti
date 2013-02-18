@@ -9,7 +9,7 @@
 	<body>
 		<h2>Ajatko taloudellisesti?</h2>
 		<div id="startScreen">
-			<button id="startButton" onclick="startGame()">Aloita</button>
+			<button id="startButton" onclick="start()">Aloita</button>
 		</div>
 		<div id="gameScreen">
 			<div id="question"></div>
@@ -20,93 +20,97 @@
 		</div>
 		<div id="resultScreen">
 			Game Over
-			<button id="startButton" onclick="startGame()">Kokeile uudelleen</button>
+			<button id="startButton" onclick="start()">Kokeile uudelleen</button>
 		</div>
 		<script type="text/javascript">
-			var questNum;
-			var correctAnswers;
-			var fuel;
-			var timer;
+			var game;
 
 			$(function(){
+				game = new GameFactory();
 				$("#gameScreen").hide();
 				$("#resultScreen").hide();
 			});
 
-			function startGame(){
-				$("#startScreen").hide();
-				$("#resultScreen").hide();
-				$("#gameScreen").show();
-				questNum = -1;
-				correctAnswers = 0;
-				fuel = 50;
-				startTimer();
-				$("#fuelStatus").html('<div style="width: 50%; background-color: #90E050; text-align: center; border-right: 1px solid #006600;">50%</div>');
-				getQuestion();
+			function start() {
+				game.startGame();
 			}
 
-			function startTimer() {
-				timer=self.setInterval(function(){watchTime()},1000);
-			}
+			function GameFactory() {
+				this.questNum;
+				this.correctAnswer;
+				this.fuel;
+				this.timer;
 
-			function watchTime() {
-				console.log("watchTime");
-				fuel-=2;
-				updateFuel(fuel);
-				if (fuel < 0) {
-					endGame();
-				}
-			}
+				this.startGame = startGame;
+				this.watchTime = watchTime;
+				this.getQuestion = getQuestion;
+				this.checkAnswer = checkAnswer;
+				this.updateFuel = updateFuel;
+				this.endGame = endGame;
 
-			function getQuestion(){
-				questNum++;
-				var a = 0;
-				$("#answerOptions").empty();
-				$.getJSON("questions.json", function(data){
-					console.log("qNum: "+questNum);
-					$("#question").text(data[questNum].question);
-					while (data[questNum].answerOptions.length > a) {
-						/*$("<button>", {
-						"text": data[questNum].answerOptions[a].option,
-						"class": "answerOption",
-						click: function() {
-							console.log(data[questNum].answerOptions[a].option+" : "+data[questNum].rightAnswer);
-							checkAnswer(data[questNum].answerOptions[a].option, data[questNum].rightAnswer);
-						}
-						}).appendTo("#answerOptions");*/
-						$("#answerOptions").append('<button class="answerOption"	onclick="checkAnswer(\''+data[questNum].answerOptions[a].option+'\', \''+data[questNum].rightAnswer+'\')">'+data[questNum].answerOptions[a].option+'</button>');
-						a++;
-					}
-				});
-			}
-
-			function checkAnswer(playerAnswer, rightAnswer) {
-				console.log(playerAnswer+" == "+rightAnswer);				
-				if (playerAnswer == rightAnswer && fuel > 0) {
-					correctAnswers++;
-					fuel+=10;
-					updateFuel(fuel);
-					console.log("correct :"+(questNum+1)+"/"+correctAnswers);
+				function startGame() {
+					console.log("startGame()");
+					$("#startScreen").hide();
+					$("#resultScreen").hide();
+					$("#gameScreen").show();
+					questNum = -1;
+					correctAnswers = 0;
+					fuel = 50;
+					timer=self.setInterval(function(){watchTime()},1000);
+				
+					$("#fuelStatus").html('<div style="width: 50%; background-color: #90E050; text-align: center; border-right: 1px solid #006600;">50%</div>');
 					getQuestion();
-				} else {
-					fuel-=10;
+				}
+
+				function watchTime() {
+					console.log("watchTime()");
+					fuel-=2;
 					updateFuel(fuel);
-					console.log("failed, fuel: "+fuel);
-					var end = (fuel > 0) ? getQuestion() : endGame();
+					if (fuel < 0) {
+						endGame();
+					}
+				}
+
+				function getQuestion(){
+					console.log("getQuestion()");
+					questNum++;
+					$("#answerOptions").empty();
+					$.getJSON("questions.json", function(data){
+						console.log("qNum: "+questNum);
+						$("#question").text(data[questNum].question);
+						for (a=0;data[questNum].answerOptions.length > a;a++) {
+							$("#answerOptions").append('<button class="answerOption"	onclick="game.checkAnswer(\''+data[questNum].answerOptions[a].option+'\', \''+data[questNum].rightAnswer+'\')">'+data[questNum].answerOptions[a].option+'</button>');
+						}
+					});
+				}
+
+				function checkAnswer(playerAnswer, rightAnswer) {
+					console.log(playerAnswer+" == "+rightAnswer);
+					if (playerAnswer == rightAnswer && fuel > 0) {
+						correctAnswers++;
+						fuel+=10;
+						updateFuel(fuel);
+						console.log("correct :"+(questNum+1)+"/"+correctAnswers);
+						getQuestion();
+					} else {
+						fuel-=10;
+						updateFuel(fuel);
+						console.log("failed, fuel: "+fuel);
+						var end = (fuel > 0) ? getQuestion() : endGame();
+					}
+				}
+
+				function updateFuel(f) {
+					$("#fuelStatus").html('<div id="fuelStatus" style="width: '+f+'%; background-color: #90E050; text-align: center; border-right: 1px solid #006600;">'+f+'%</div>');
+				}
+
+				function endGame() {
+					$("#startScreen").hide();
+					$("#gameScreen").hide();
+					$("#resultScreen").show();
+					timer=window.clearInterval(timer);
 				}
 			}
-
-			function updateFuel(f) {
-				$("#fuelStatus").html('<div id="fuelStatus" style="width: '+f+'%; background-color: #90E050; text-align: center; border-right: 1px solid #006600;">'+f+'%</div>');
-			}
-
-			function endGame() {
-				$("#startScreen").hide();
-				$("#gameScreen").hide();
-				$("#resultScreen").show();
-				timer=window.clearInterval(timer);
-			}
-			
 		</script>
 	</body>
 </html>
