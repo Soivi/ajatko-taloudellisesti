@@ -29,7 +29,6 @@
 				game = new GameFactory();
 				$("#gameScreen").hide();
 				$("#resultScreen").hide();
-				game.startGame(); /// !!!!!
 			});
 
 			function start() {
@@ -51,13 +50,11 @@
 
 				function startGame() {
 					console.log("startGame()");
-					$("#startScreen").hide();
-					$("#resultScreen").hide();
-					$("#gameScreen").show();
+					showGameScreen();
 					questNum = -1;
 					correctAnswers = 0;
 					fuel = 50;
-					//timer=self.setInterval(function(){watchTime()},1000);
+					timer=self.setInterval(function(){watchTime()},1000);
 				
 					$("#fuelStatus").html('<div style="width: 50%; background-color: #90E050; text-align: center; border-right: 1px solid #006600;">50%</div>');
 					questionFactory = new QuestionFactory();
@@ -66,9 +63,8 @@
 				}
 
 				function watchTime() {
-					console.log("watchTime()");
-					fuel-=2;
-					updateFuel(fuel);
+					this.fuel-=2;
+					updateFuel();
 					if (fuel < 0) {
 						endGame();
 					}
@@ -78,26 +74,49 @@
 					console.log(playerAnswer+" == "+rightAnswer);
 					if (playerAnswer == rightAnswer && fuel > 0) {
 						correctAnswers++;
-						fuel+=10;
-						updateFuel(fuel);
-						console.log("correct :"+(questNum+1)+"/"+correctAnswers);
-						questionFactory.getQuestion();
+						moreFuel();
 					} else {
-						fuel-=10;
-						updateFuel(fuel);
-						console.log("failed, fuel: "+fuel);
-						var end = (fuel > 0) ? questionFactory.getQuestion() : endGame();
+						reduceFuel();
 					}
+					updateFuel();
+					var end = (fuel < 0) ? endGame() : questionFactory.getQuestion();
 				}
 
-				function updateFuel(f) {
-					$("#fuelStatus").html('<div id="fuelStatus" style="width: '+f+'%; background-color: #90E050; text-align: center; border-right: 1px solid #006600;">'+f+'%</div>');
+				function updateFuel() {
+					$("#fuelStatus").html('<div id="fuelStatus" style="width: '+this.fuel+'%; background-color: #90E050; text-align: center; border-right: 1px solid #006600;">'+this.fuel+'%</div>');
 				}
 
-				function endGame() {
+				function moreFuel() {
+					console.log("fuel: "+fuel);
+					console.log("this,fuel: "+this.fuel);
+					this.fuel+=10;
+				}
+
+				function reduceFuel() {
+					this.fuel-=10;
+					if (fuel < 0) { endGame(); }
+				}
+
+				function showStartScreen() {
+					$("#startScreen").show();
+					$("#gameScreen").hide();
+					$("#resultScreen").hide();
+				}
+
+				function showGameScreen() {
+					$("#startScreen").hide();
+					$("#gameScreen").show();
+					$("#resultScreen").hide();
+				}
+
+				function showResultScreen() {
 					$("#startScreen").hide();
 					$("#gameScreen").hide();
 					$("#resultScreen").show();
+				}
+
+				function endGame() {
+					showResultScreen();
 					timer=window.clearInterval(timer);
 				}
 			}
@@ -152,13 +171,8 @@ console.log(this.questionsList[this.questNum]);
 				this.question;
 				this.rightAnswer;
 				this.answerOptions = new Array();
-				this.pushAnswer = pushAnswer;
 				this.setAnswerOptions = setAnswerOptions;
 
-				function pushAnswer(answer) {
-					answerOptions.push(answer);
-				}
-				
 				function setAnswerOptions(answer) {
 					answerOptions = answer;
 				}
