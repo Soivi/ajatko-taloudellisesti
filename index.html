@@ -29,6 +29,7 @@
 				game = new GameFactory();
 				$("#gameScreen").hide();
 				$("#resultScreen").hide();
+				game.startGame(); /// !!!!!
 			});
 
 			function start() {
@@ -40,10 +41,10 @@
 				this.correctAnswer;
 				this.fuel;
 				this.timer;
+				this.questionFactory;
 
 				this.startGame = startGame;
 				this.watchTime = watchTime;
-				this.getQuestion = getQuestion;
 				this.checkAnswer = checkAnswer;
 				this.updateFuel = updateFuel;
 				this.endGame = endGame;
@@ -56,10 +57,12 @@
 					questNum = -1;
 					correctAnswers = 0;
 					fuel = 50;
-					timer=self.setInterval(function(){watchTime()},1000);
+					//timer=self.setInterval(function(){watchTime()},1000);
 				
 					$("#fuelStatus").html('<div style="width: 50%; background-color: #90E050; text-align: center; border-right: 1px solid #006600;">50%</div>');
-					getQuestion();
+					questionFactory = new QuestionFactory();
+					questionFactory.buildQuestions();
+					questionFactory.getQuestion();
 				}
 
 				function watchTime() {
@@ -71,19 +74,6 @@
 					}
 				}
 
-				function getQuestion(){
-					console.log("getQuestion()");
-					questNum++;
-					$("#answerOptions").empty();
-					$.getJSON("questions.json", function(data){
-						console.log("qNum: "+questNum);
-						$("#question").text(data[questNum].question);
-						for (a=0;data[questNum].answerOptions.length > a;a++) {
-							$("#answerOptions").append('<button class="answerOption"	onclick="game.checkAnswer(\''+data[questNum].answerOptions[a].option+'\', \''+data[questNum].rightAnswer+'\')">'+data[questNum].answerOptions[a].option+'</button>');
-						}
-					});
-				}
-
 				function checkAnswer(playerAnswer, rightAnswer) {
 					console.log(playerAnswer+" == "+rightAnswer);
 					if (playerAnswer == rightAnswer && fuel > 0) {
@@ -91,12 +81,12 @@
 						fuel+=10;
 						updateFuel(fuel);
 						console.log("correct :"+(questNum+1)+"/"+correctAnswers);
-						getQuestion();
+						questionFactory.getQuestion();
 					} else {
 						fuel-=10;
 						updateFuel(fuel);
 						console.log("failed, fuel: "+fuel);
-						var end = (fuel > 0) ? getQuestion() : endGame();
+						var end = (fuel > 0) ? questionFactory.getQuestion() : endGame();
 					}
 				}
 
@@ -109,6 +99,68 @@
 					$("#gameScreen").hide();
 					$("#resultScreen").show();
 					timer=window.clearInterval(timer);
+				}
+			}
+
+			function QuestionFactory() {
+				this.questNum = -1;
+				this.questionsList = new Array();
+
+				this.buildQuestions = buildQuestions;
+				this.getQuestion = getQuestion;
+
+				function buildQuestions() {
+					var list = new Array();
+					$.ajax({
+						url: 'questions.json',
+						dataType: 'json',
+						async: false,
+						success: jsonCallback
+					});
+
+					function jsonCallback(data) {
+						for (i=0;data.length>i;i++) {
+							var qlist = new Array();
+							list[i] = new Question();
+							list[i].id = i;
+							list[i].question = data[i].question;
+							list[i].rightAnswer = data[i].rightAnswer;
+							for (a=0;data[i].answerOptions.length>a;a++) {
+								qlist[a] = data[i].answerOptions[a].option;
+							}
+							list[i].answerOptions = qlist;
+						}
+					}
+					this.questionsList = list;
+				}
+
+				function getQuestion(){
+					this.questNum++;
+					$("#answerOptions").empty();
+					$("#question").text(this.questionsList[this.questNum].question); // print question
+console.log(this.questionsList[this.questNum]);
+					// Loop answer options
+					for (a=0;this.questionsList[this.questNum].answerOptions.length>a;a++) {
+						$("#answerOptions").append('<button class="answerOption"	onclick="game.checkAnswer(\''+this.questionsList[this.questNum].answerOptions[a]+'\', \''+this.questionsList[this.questNum].rightAnswer+'\')">'+this.questionsList[this.questNum].answerOptions[a]+'</button>');
+					}
+				}
+
+			}
+
+			function Question() {
+				this.id;
+				this.question;
+				this.rightAnswer;
+				this.answerOptions = new Array();
+				this.pushAnswer = pushAnswer;
+				this.setAnswerOptions = setAnswerOptions;
+
+				function pushAnswer(answer) {
+					answerOptions.push(answer);
+				}
+				
+				function setAnswerOptions(answer) {
+					answerOptions = answer;
 				}
 			}
 		</script>
