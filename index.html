@@ -18,52 +18,52 @@
 				
 			</div>
 		</div>
-		<div id="resultScreen">
-			Game Over
-			<button id="startButton" onclick="start()">Kokeile uudelleen</button>
-		</div>
+		<div id="resultScreen"></div>
 		<script type="text/javascript">
 			var game;
 
 			$(function(){
-				game = new GameFactory();
-				$("#gameScreen").hide();
-				$("#resultScreen").hide();
+				game = new Game();
+				game.showStartScreen();
 			});
 
 			function start() {
 				game.startGame();
 			}
 
-			function GameFactory() {
+			function Game() {
 				this.questNum;
 				this.correctAnswer;
 				this.fuel;
 				this.timer;
 				this.questionFactory;
+				this.score;
 
 				this.startGame = startGame;
 				this.watchTime = watchTime;
 				this.checkAnswer = checkAnswer;
 				this.updateFuel = updateFuel;
 				this.endGame = endGame;
+				this.showStartScreen = showStartScreen;
+				this.showGameScreen = showGameScreen;
+				this.showResultScreen = showResultScreen;
 
 				function startGame() {
-					console.log("startGame()");
 					showGameScreen();
 					questNum = -1;
 					correctAnswers = 0;
 					fuel = 50;
-					timer=self.setInterval(function(){watchTime()},1000);
-				
-					$("#fuelStatus").html('<div style="width: 50%; background-color: #90E050; text-align: center; border-right: 1px solid #006600;">50%</div>');
+					score = 0;
+					timer=self.setInterval(function(){watchTime()},100);
+					updateFuel();
+
 					questionFactory = new QuestionFactory();
 					questionFactory.buildQuestions();
-					questionFactory.getQuestion();
+					getQuestion();
 				}
 
 				function watchTime() {
-					this.fuel-=2;
+					this.fuel-=0.3;
 					updateFuel();
 					if (fuel < 0) {
 						endGame();
@@ -71,15 +71,15 @@
 				}
 
 				function checkAnswer(playerAnswer, rightAnswer) {
-					console.log(playerAnswer+" == "+rightAnswer);
-					if (playerAnswer == rightAnswer && fuel > 0) {
+					if (playerAnswer == rightAnswer) {
 						correctAnswers++;
+						score+=100;
 						moreFuel();
 					} else {
 						reduceFuel();
 					}
 					updateFuel();
-					var end = (fuel < 0) ? endGame() : questionFactory.getQuestion();
+					var end = (fuel < 0) ? endGame() : getQuestion();
 				}
 
 				function updateFuel() {
@@ -87,9 +87,11 @@
 				}
 
 				function moreFuel() {
-					console.log("fuel: "+fuel);
-					console.log("this,fuel: "+this.fuel);
-					this.fuel+=10;
+					if ((this.fuel+10) >= 100) {
+						this.fuel = 100;
+					} else {
+						this.fuel+=10;
+					}
 				}
 
 				function reduceFuel() {
@@ -117,16 +119,33 @@
 
 				function endGame() {
 					showResultScreen();
+					$("#resultScreen").append('Peli loppui<br /><button id="startButton" onclick="start()">Kokeile uudelleen</button><br />');
+					$("#resultScreen").append('Tulos: '+score+' pistettä');
 					timer=window.clearInterval(timer);
 				}
+
+				function getQuestion(){
+					this.questNum++;
+					console.log(questionFactory.questionsList.length);
+					if (questNum >= questionFactory.questionsList.length) {
+						endGame();
+					} else {
+						$("#answerOptions").empty();
+						$("#question").text(questionFactory.questionsList[this.questNum].question); // print question
+
+						// Loop answer options
+						for (a=0;questionFactory.questionsList[this.questNum].answerOptions.length>a;a++) {
+							$("#answerOptions").append('<button class="answerOption"	onclick="game.checkAnswer(\''+questionFactory.questionsList[this.questNum].answerOptions[a]+'\', \''+questionFactory.questionsList[this.questNum].rightAnswer+'\')">'+questionFactory.questionsList[this.questNum].answerOptions[a]+'</button>');
+						}
+					}
+				}
+
 			}
 
 			function QuestionFactory() {
-				this.questNum = -1;
 				this.questionsList = new Array();
 
 				this.buildQuestions = buildQuestions;
-				this.getQuestion = getQuestion;
 
 				function buildQuestions() {
 					var list = new Array();
@@ -151,17 +170,6 @@
 						}
 					}
 					this.questionsList = list;
-				}
-
-				function getQuestion(){
-					this.questNum++;
-					$("#answerOptions").empty();
-					$("#question").text(this.questionsList[this.questNum].question); // print question
-console.log(this.questionsList[this.questNum]);
-					// Loop answer options
-					for (a=0;this.questionsList[this.questNum].answerOptions.length>a;a++) {
-						$("#answerOptions").append('<button class="answerOption"	onclick="game.checkAnswer(\''+this.questionsList[this.questNum].answerOptions[a]+'\', \''+this.questionsList[this.questNum].rightAnswer+'\')">'+this.questionsList[this.questNum].answerOptions[a]+'</button>');
-					}
 				}
 
 			}
