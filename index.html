@@ -118,6 +118,7 @@
 				}
 
 				function endGame() {
+					$("#resultScreen").empty();
 					showResultScreen();
 					$("#resultScreen").append('Peli loppui<br /><button id="startButton" onclick="start()">Kokeile uudelleen</button><br />');
 					$("#resultScreen").append('Tulos: '+score+' pistettä');
