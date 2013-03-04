@@ -43,6 +43,8 @@
 				this.timer;
 				this.questionFactory;
 				this.score;
+				this.fuelConsumption;
+				this.trip;
 
 				this.startGame = startGame;
 				this.watchTime = watchTime;
@@ -57,38 +59,45 @@
 					showGameScreen();
 					questNum = -1;
 					correctAnswers = 0;
-					fuel = 50;
+					fuel = 100;
+					fuelConsumption = 2;
 					score = 0;
+					trip = 0;
 					timer=self.setInterval(function(){watchTime()},100);
 					updateFuel();
 
 					questionFactory = new QuestionFactory();
 					questionFactory.buildQuestions();
+					questionFactory.scrambleList();
 					getQuestion();
 				}
 
 				function watchTime() {
-					this.fuel-=0.3;
+					this.fuel-=fuelConsumption;
 					updateFuel();
 					if (fuel < 0) {
 						endGame();
 					}
+					this.trip+=3.333333;
 				}
 
 				function checkAnswer(playerAnswer, rightAnswer) {
 					if (playerAnswer == rightAnswer) {
 						correctAnswers++;
 						score+=100;
-						moreFuel();
+						fuelConsumption-=0.5;
+						//moreFuel();
 					} else {
-						reduceFuel();
+						fuelConsumption+=0.5;
+						//reduceFuel();
 					}
+					console.log("kulutus: "+fuelConsumption);
 					updateFuel();
 					var end = (fuel < 0) ? endGame() : getQuestion();
 				}
 
 				function updateFuel() {
-					$("#fuelStatus").html('<div id="fuelStatus" style="width: '+this.fuel+'%; background-color: #90E050; text-align: center; border-right: 1px solid #006600;">'+this.fuel+'%</div>');
+					$("#fuelStatus").html('<div id="fuelStatus" style="height: '+this.fuel+'%; background-color: #90E050; text-align: center; border-right: 1px solid #006600;">'+this.fuel+'%</div>');
 				}
 
 				function moreFuel() {
@@ -125,7 +134,7 @@
 				function endGame() {
 					$("#resultScreen").empty();
 					showResultScreen();
-					$("#resultScreen").append('<div class="result">Tulos: '+score+' pistettä</div>');
+					$("#resultScreen").append('<div class="result">Matka: '+this.trip.toFixed(2)+' metriä</div>');
 					$("#resultScreen").append('<a href="javascript:start()"><div class="startGame"></div></a>');
 					timer=window.clearInterval(timer);
 				}
@@ -176,6 +185,16 @@
 						}
 					}
 					this.questionsList = list;
+				}
+
+				this.scrambleList = function() {
+					for (i = 0; i < 1000; i++) {
+						x = Math.floor(Math.random() * this.questionsList.length);
+						y = Math.floor(Math.random() * this.questionsList.length);
+						temp = this.questionsList[x];
+						this.questionsList[x] = this.questionsList[y];
+						this.questionsList[y] = temp;
+					}
 				}
 
 			}

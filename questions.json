@@ -1,15 +1,5 @@
 [
 	{
-		"question":"Paljon tekee 2+1?",
-		"answerOptions":
-		[
-		{"option": 2},
-		{"option": 3},
-		{"option": 5}
-		],
-		"rightAnswer": 3
-	},
-	{
 		"question":"Mikä seuraavista on tunnettu autonmerkki?",
 		"answerOptions":
 		[
@@ -20,93 +10,175 @@
 		"rightAnswer": "toyota"
 	},
 	{
-		"question":"Paljon tekee 2+1?",
+		"question":"Taloudellinen ajotapa lisää?",
 		"answerOptions":
 		[
-		{"option": 2},
-		{"option": 3},
-		{"option": 5}
+		{"option": "Liikenneturvallisuutta"},
+		{"option": "Hiilidioksidipäästöjä"},
+		{"option": "Huolto-, korjaus- ja rengaskustannuksia"}
 		],
-		"rightAnswer": 3
+		"rightAnswer": "Liikenneturvallisuutta"
 	},
 	{
-		"question":"Paljon tekee 2+1?",
+		"question":"Ajaessasi tasaisella nopeudella moottorisi kierrokset kuuluisi olla?",
 		"answerOptions":
 		[
-		{"option": 2},
-		{"option": 3},
-		{"option": 5}
+		{"option": "Noin 700-1200 kierrosta minuutissa"},
+		{"option": "Noin 1500-2000 kierrosta minuutissa"},
+		{"option": "Noin 3000-4000 kierrosta minuutissa"}
 		],
-		"rightAnswer": 3
+		"rightAnswer": "Noin 1500-2000 kierrosta minuutissa"
 	},
 	{
-		"question":"Paljon tekee 2+1?",
+		"question":"Alhainen rengaspaine?",
 		"answerOptions":
 		[
-		{"option": 2},
-		{"option": 3},
-		{"option": 5}
+		{"option": "Parantaa turvallisuutta"},
+		{"option": "Lisää polttoaineen kulutusta"},
+		{"option": "Kuluttaa vähemmän renkaita"}
 		],
-		"rightAnswer": 3
+		"rightAnswer": "Lisää polttoaineen kulutusta"
 	},
 	{
-		"question":"Paljon tekee 2+1?",
+		"question":"Kuinka usein rengaspaine pitäisi tarkistaa?",
 		"answerOptions":
 		[
-		{"option": 2},
-		{"option": 3},
-		{"option": 5}
+		{"option": "Vähintään kerran kuukaudessa"},
+		{"option": "Vähintään puolen vuoden välein"},
+		{"option": "Se riittää kun tarkistaa renkaiden vaihdon yhteydessä"}
 		],
-		"rightAnswer": 3
+		"rightAnswer": "Vähintään kerran kuukaudessa"
 	},
 	{
-		"question":"Paljon tekee 2+1?",
+		"question":"Rengaspaineet pitäisi tarkistaa?",
 		"answerOptions":
 		[
-		{"option": 2},
-		{"option": 3},
-		{"option": 5}
+		{"option": "Kylmistä renkaista"},
+		{"option": "Lämpimistä renkaista"},
+		{"option": "Ei väliä"}
 		],
-		"rightAnswer": 3
+		"rightAnswer": "Kylmistä renkaista"
 	},
 	{
-		"question":"Paljon tekee 2+1?",
+		"question":"Turvallinen ajokäyttäytyminen saavutetaan?",
 		"answerOptions":
 		[
-		{"option": 2},
-		{"option": 3},
-		{"option": 5}
+		{"option": "Ennakoimalla muiden ohittamista"},
+		{"option": "Ylinopeuden ajamista tasaisella nopeudella"},
+		{"option": "Stressiä ja aggressiivisuutta vähentämällä"}
 		],
-		"rightAnswer": 3
+		"rightAnswer": "Stressiä ja aggressiivisuutta vähentämällä"
 	},
 	{
-		"question":"Paljon tekee 2+1?",
+		"question":"Kylmän moottorin esilämmitys tulisi aloittaa jo?",
 		"answerOptions":
 		[
-		{"option": 2},
-		{"option": 3},
-		{"option": 5}
+		{"option": "alle +5 asteessa"},
+		{"option": "alle 0 asteessa"},
+		{"option": "alle -5 asteessa"}
 		],
-		"rightAnswer": 3
+		"rightAnswer": "alle +5 asteessa"
 	},
 	{
-		"question":"Paljon tekee 2+1?",
+		"question":"Kiihdyttäessäsi tulisi vaihtaa isommalle vaihteelle kun kierrokset ovat?",
 		"answerOptions":
 		[
-		{"option": 2},
-		{"option": 3},
-		{"option": 5}
+		{"option": "2000-2500 kierrosta minuutissa"},
+		{"option": "3000-3500 kierrosta minuutissa"},
+		{"option": "4000-4500 kierrosta minuutissa"}
 		],
-		"rightAnswer": 3
+		"rightAnswer": "2000-2500 kierrosta minuutissa"
 	},
 	{
-		"question":"Paljon tekee 2+1?",
+		"question":"Hidastaessasi vauhtia taloudellisinta on?",
 		"answerOptions":
 		[
-		{"option": 2},
-		{"option": 3},
-		{"option": 5}
+		{"option": "Painaa jarrua ja laittaa vaihde vapaalle"},
+		{"option": "Vapauttaa kaasupoljin (moorrorijarruttaa)"},
+		{"option": "Painaa jarrua ja painaa kytkimen pohjaan"}
 		],
-		"rightAnswer": 3
+		"rightAnswer": "Vapauttaa kaasupoljin (moorrorijarruttaa)"
+	},
+	{
+		"question":"Kuinka paljon 100kg ylimääräinen kuorma lisää polttoaineen kulutusta?",
+		"answerOptions":
+		[
+		{"option": "2-4%"},
+		{"option": "6-8%"},
+		{"option": "10-12%"}
+		],
+		"rightAnswer": "6-8%"
+	},
+	{
+		"question":"Mikä auton lisälaitteista lisää polttoaineen kulutusta?",
+		"answerOptions":
+		[
+		{"option": "Ajonopeuden säädin"},
+		{"option": "Ilmastointilaite"},
+		{"option": "Ajotietokone"}
+		],
+		"rightAnswer": "Ilmastointilaite"
+	},
+	{
+		"question":"Normaalina kesäpäivänä kuinka monta minuuttia saat pitää moottoria tyhjäkäynnillä?",
+		"answerOptions":
+		[
+		{"option": "Enintään minuutin"},
+		{"option": "Enintään 2 minuuttia"},
+		{"option": "Enintään 5 minuuttia"}
+		],
+		"rightAnswer": "Enintään 2 minuuttia"
+	},
+	{
+		"question":"Ennakoiva ajotapa vähentää?",
+		"answerOptions":
+		[
+		{"option": "Polttoaineen kulutusta"},
+		{"option": "Liikenneturvallisuutta"},
+		{"option": "Matkustusmukavuutta"}
+		],
+		"rightAnswer": "Polttoaineen kulutusta"
+	},
+	{
+		"question":"Mikä toimii hybridiauton voimalähteenä?",
+		"answerOptions":
+		[
+		{"option": "Sähkömoottori"},
+		{"option": "Sähkö- ja polttomoottori"},
+		{"option": "Polttomoottori"}
+		],
+		"rightAnswer": "Sähkö- ja polttomoottori"
+	},
+	{
+		"question":"Ennakoivaa ajamista on?",
+		"answerOptions":
+		[
+		{"option": "Turhien kiihdytysten lisääminen"},
+		{"option": "Katsomalla kauas menosuuntaan"},
+		{"option": "Alle 2 sekunnin välimatkan pitäminen edessä ajavaan"}
+		],
+		"rightAnswer": "Katsomalla kauas menosuuntaan"
+	},
+	{
+		"question":"Taloudellista ajamista on?",
+		"answerOptions":
+		[
+		{"option": "Mietit ajoreittisi ennen ajamaan lähtemistä"},
+		{"option": "Mahdollisimman pienillä vaihteilla ajaminen ylämäessä"},
+		{"option": "Mahdollisimman hitaasti kiihdyttäminen tavoite nopeuteen"}
+		],
+		"rightAnswer": "Mietit ajoreittisi ennen ajamaan lähtemistä"
+	},
+	{
+		"question":"Taloudellisinta on kiihdyttää tavoitenopeuteen?",
+		"answerOptions":
+		[
+		{"option": "Reippaasti kiihdyttämällä"},
+		{"option": "Hitaasti kiihdyttämällä"},
+		{"option": "Kuin vain. Loppu tulos on sama"}
+		],
+		"rightAnswer": "Reippaasti kiihdyttämällä"
 	}
+
+	
 ]
