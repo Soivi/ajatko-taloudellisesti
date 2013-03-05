@@ -8,7 +8,7 @@
 	<body>
 
 		<div id="startScreen">
-			<a href="javascript:start()"><div class="startGame"></div></a>
+			<a href="javascript:start();"><div class="startGame"></div></a>
 			<!-- <button id="startButton" onclick="start()">Aloita</button> -->
 		</div>
 
@@ -18,7 +18,9 @@
 				<div id="question"></div>
 				<div id="answerOptions"></div>
 			</div>
-			<div id="fuelStatus" style="border: 1px solid #184161; width: 100px; height:400px;"></div>
+			<div id="fuelGauge">
+				<div id="fuelStatus">100%</div>
+			</div>
 		</div>
 
 		<div id="resultScreen"></div>
@@ -45,6 +47,7 @@
 				this.score;
 				this.fuelConsumption;
 				this.trip;
+				this.speed;
 
 				this.startGame = startGame;
 				this.watchTime = watchTime;
@@ -60,7 +63,9 @@
 					questNum = -1;
 					correctAnswers = 0;
 					fuel = 100;
-					fuelConsumption = 2;
+					speed = 3.333333;
+					//fuelConsumption = 10/100000*this.speed;
+					fuelConsumption = 1;
 					score = 0;
 					trip = 0;
 					timer=self.setInterval(function(){watchTime()},100);
@@ -78,17 +83,17 @@
 					if (fuel < 0) {
 						endGame();
 					}
-					this.trip+=3.333333;
+					this.trip+=this.speed;
 				}
 
 				function checkAnswer(playerAnswer, rightAnswer) {
 					if (playerAnswer == rightAnswer) {
 						correctAnswers++;
 						score+=100;
-						fuelConsumption-=0.5;
+						fuelConsumption-=0.25;
 						//moreFuel();
 					} else {
-						fuelConsumption+=0.5;
+						fuelConsumption+=0.25;
 						//reduceFuel();
 					}
 					console.log("kulutus: "+fuelConsumption);
@@ -97,7 +102,8 @@
 				}
 
 				function updateFuel() {
-					$("#fuelStatus").html('<div id="fuelStatus" style="height: '+this.fuel+'%; background-color: #90E050; text-align: center; border-right: 1px solid #006600;">'+this.fuel+'%</div>');
+					$("#fuelStatus").text(this.fuel+'%');
+					$("#fuelGauge").css("height", this.fuel);
 				}
 
 				function moreFuel() {
@@ -141,7 +147,6 @@
 
 				function getQuestion(){
 					this.questNum++;
-					console.log(questionFactory.questionsList.length);
 					if (questNum >= questionFactory.questionsList.length) {
 						endGame();
 					} else {
@@ -160,9 +165,7 @@
 			function QuestionFactory() {
 				this.questionsList = new Array();
 
-				this.buildQuestions = buildQuestions;
-
-				function buildQuestions() {
+				this.buildQuestions = function() {
 					var list = new Array();
 					$.ajax({
 						url: 'questions.json',

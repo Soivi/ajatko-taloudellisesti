@@ -1,11 +1,10 @@
-html, body {
-	margin: 0;
-	padding: 0;
-	width: 960px;
-	height: 640px;
+html {
+	width: 100%;
+	height:100%;
 }
 body {
 	background-image: url('images/bg.png');
+	background-size: 100% 100%;
 	background-repeat: no-repeat;
 	font-family: Candara;
 }
@@ -17,22 +16,38 @@ body {
 	     url('fonts/candara-webfont.ttf')  format('truetype'),
 	     url('fonts/candara-webfont.svg#svgcandara') format('svg');
 }
-.fuel {
-	background-image: url('images/mittaribg.png');
-	background-repeat: no-repeat;
-	width: 69px;
-	height: 259px;
+#fuelGauge {
+	width: 20px;
+	height:200px;
 	float: left;
 	margin-left: 5%;
 	margin-top: 20%;
 }
+#fuelStatus {
+	background-color: #90E050;
+	border-right: 1px solid #006600;
+	width: 33px;
+	height: 100%;
+	position:relative;
+	bottom:0;
+}
+.fuel {
+	/*background-image: url('images/mittaribg.png');
+	background-repeat: no-repeat;s
+	width: 69px;
+	height: 259px;
+	float: left;
+	margin-left: 5%;
+	margin-top: 20%;*/
+}
 .questions {
 	float: right;
-	margin-right: 10%;
-	width: 70%;
+	margin-right: 20%;
+	width: 60%;
 	background-color: white;
 	margin-top: 10%;
-	font-size: 2em;
+	margin-bottom: 40px;
+	font-size: 1.5em;
 	border-radius: 10px;
 	-moz-border-radius: 10px;
 	-o-border-radius: 10px;
@@ -55,7 +70,7 @@ body {
 	padding: 30px;
 }
 .answerOption {
-	height: 83px;
+	font-size:80%;
 	background-image: linear-gradient(bottom, rgb(242,242,242) 11%, rgb(240,240,240) 100%, rgb(255,255,255) 78%);
 	background-image: -o-linear-gradient(bottom, rgb(242,242,242) 11%, rgb(240,240,240) 100%, rgb(255,255,255) 78%);
 	background-image: -moz-linear-gradient(bottom, rgb(242,242,242) 11%, rgb(240,240,240) 100%, rgb(255,255,255) 78%);
@@ -70,23 +85,18 @@ body {
 		color-stop(1, rgb(240,240,240)),
 		color-stop(0.78, rgb(255,255,255))
 	);
+
 	border-bottom: 1px solid #cfcfcf;
 	box-sizing: border-box;
-	padding-top: 20px;
-	padding-left: 20px;
-	padding-bottom: 10px;
-	padding-right: 10px;
+	padding: 20px 10px 10px 20px;
 }
 .question {
 	width: 100%;
 	height: 83px;
-	background-color: #white;
+	background-color: white;
 	border-bottom: 1px solid #cfcfcf;
 	box-sizing: border-box;
-	padding-top: 20px;
-	padding-left: 20px;
-	padding-bottom: 10px;
-	padding-right: 10px;
+	padding: 20px 10px 10px 20px;
 	color: #00315a;
 	font-weight: bold;
 }
@@ -104,7 +114,7 @@ body {
 	min-height: 141px;
 	margin-left: auto;
 	margin-right: auto;
-	margin-top: 25%;
+	margin-top: 10%;
 	display: block;
 }
 h1, h2 {
