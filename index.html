@@ -65,7 +65,7 @@
 					fuel = 100;
 					speed = 3.333333;
 					//fuelConsumption = 10/100000*this.speed;
-					fuelConsumption = 1;
+					fuelConsumption = 0.1;
 					score = 0;
 					trip = 0;
 					timer=self.setInterval(function(){watchTime()},100);
@@ -90,7 +90,7 @@
 					if (playerAnswer == rightAnswer) {
 						correctAnswers++;
 						score+=100;
-						fuelConsumption-=0.25;
+						fuelConsumption-=0.01;
 						//moreFuel();
 					} else {
 						fuelConsumption+=0.25;
@@ -102,7 +102,7 @@
 				}
 
 				function updateFuel() {
-					$("#fuelStatus").text(this.fuel+'%');
+					$("#fuelStatus").text(this.fuel.toFixed(2)+'%');
 					$("#fuelGauge").css("height", this.fuel);
 				}
 

@@ -45,7 +45,7 @@ body {
 	margin-right: 20%;
 	width: 60%;
 	background-color: white;
-	margin-top: 10%;
+	margin-top: 20%;
 	margin-bottom: 40px;
 	font-size: 1.5em;
 	border-radius: 10px;
@@ -59,7 +59,7 @@ body {
 	margin-left: auto;
 	width: 70%;
 	background-color: white;
-	margin-top: 10%;
+	margin-top: 20%;
 	font-size: 2em;
 	border-radius: 10px;
 	-moz-border-radius: 10px;
@@ -114,7 +114,7 @@ body {
 	min-height: 141px;
 	margin-left: auto;
 	margin-right: auto;
-	margin-top: 10%;
+	margin-top: 20%;
 	display: block;
 }
 h1, h2 {
