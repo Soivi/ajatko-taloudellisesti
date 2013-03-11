@@ -8,6 +8,7 @@
 	<body>
 
 		<div id="startScreen">
+			<div class="whiteBox" style="font-size:100%;">Pelin ideanan on vastata taloudelliseen ajamiseen liittyviin kysymyksiin. Jokaisesta oikeasta vastauksesta vähennät kulutustasi, ja jokaisesta väärästä vastauksesta taas nostatat sitä. Pelissä ajat 100km/h, ja keskikulutuksesi pelin alussa on 10l/100km</div>
 			<div class="startGame" onclick="start()"></div>
 			<!-- <button id="startButton" onclick="start()">Aloita</button> -->
 		</div>
@@ -22,10 +23,15 @@
 			<div id="questions">
 				<div id="question"></div>
 				<div id="answerOptions"></div>
-				<div id="kojelauta">
+				<div id="dashboardWrap">
 					<div id="dashboard">
-						<div id="speed">100</div>
-						<div id="fuelConsumption"><img src="images/gasOut.png"><span id="fuelConsumptionStatus">10.00</span> <span class="litra">l</span></div>
+						<div id="speed">120</div>
+						<div id="fuelConsumption">
+							<span id="fuelEmptyImage">
+								<img src="images/fuel.png" />
+							</span>
+							<span id="fuelConsumptionStatus">10.00</span> <span class="litra">l</span>
+						</div>
 					</div>
 					<div id="tripGauge">Kuljettu: <span id="trip">0</span>m</div>
 				</div>
@@ -74,8 +80,7 @@
 					questNum = -1;
 					correctAnswers = 0;
 					fuel = 5;
-					speed = 3.333333;
-					//fuelConsumption = 10/100000*this.speed;
+					speed =3.333333;
 					fuelConsumption = 10;
 					score = 0;
 					trip = 0;
@@ -126,6 +131,17 @@
 					var fuelStatus = (this.fuel/5)*100;
 					$("#fuelStatus").text(fuelStatus.toFixed(2)+'%');
 					$("#fuelGauge").css("height", fuelStatus+'%');
+
+					if (fuelStatus >= 50) {
+						$("#fuelStatus").css('background-color', '#90E050');
+						$("#fuelEmptyImage").html('<img src="images/fuel.png" />');
+					} else if (fuelStatus < 50 && fuelStatus > 15){
+						$("#fuelStatus").css('background-color', 'yellow');
+						$("#fuelEmptyImage").html('<img src="images/fuel.png" />');
+					} else if (fuelStatus < 15) {
+						$("#fuelStatus").css('background-color', 'red');
+						$("#fuelEmptyImage").html('<img src="images/fuelEmpty.png" />');
+					}
 				}
 
 				function moreFuel() {
@@ -161,10 +177,10 @@
 
 				function endGame() {
 					this.avaFuelConsuption = (5-this.fuel)/this.trip*10000;
-					
+					var tripFuelConsuption = (5-this.fuel)/10;
 					$("#resultScreen").empty();
 					showResultScreen();
-					$("#resultScreen").append('<div class="result">Matka: '+this.trip.toFixed(2)+' metriä,<br/>Kulutus: '+this.avaFuelConsuption.toFixed(2)+'l/100km</div>');
+					$("#resultScreen").append('<div class="whiteBox">Matka: '+this.trip.toFixed(2)+' metriä,<br/>Keskikulutus: '+this.avaFuelConsuption.toFixed(2)+'l/100km<br />Bensiiniä kului: '+tripFuelConsuption.toFixed(2)+'l</div>');
 					$("#resultScreen").append('<div class="startGame" onclick="start()"></div>');
 					timer=window.clearInterval(timer);
 				}
