@@ -1,15 +1,5 @@
 [
 	{
-		"question":"Mikä seuraavista on tunnettu autonmerkki?",
-		"answerOptions":
-		[
-		{"option": "sony"},
-		{"option": "merce"},
-		{"option": "toyota"}
-		],
-		"rightAnswer": "toyota"
-	},
-	{
 		"question":"Taloudellinen ajotapa lisää?",
 		"answerOptions":
 		[

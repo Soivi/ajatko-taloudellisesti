@@ -16,36 +16,21 @@ body {
 	     url('fonts/candara-webfont.ttf')  format('truetype'),
 	     url('fonts/candara-webfont.svg#svgcandara') format('svg');
 }
-#fuelGauge {
-	width: 20px;
-	height:200px;
-	float: left;
-	margin-left: 5%;
-	margin-top: 20%;
+#startScreen {
+	margin-top:12%;
 }
-#fuelStatus {
-	background-color: #90E050;
-	border-right: 1px solid #006600;
-	width: 33px;
-	height: 100%;
-	position:relative;
-	bottom:0;
+.startGame {
+	background-image: url('images/start.png');
+	width: 458px;
+	min-height: 141px;
+	margin-left: 33%;
 }
-.fuel {
-	/*background-image: url('images/mittaribg.png');
-	background-repeat: no-repeat;s
-	width: 69px;
-	height: 259px;
-	float: left;
-	margin-left: 5%;
-	margin-top: 20%;*/
-}
-.questions {
+#questions {
 	float: right;
 	margin-right: 20%;
 	width: 60%;
 	background-color: white;
-	margin-top: 20%;
+	margin-top: 12%;
 	margin-bottom: 40px;
 	font-size: 1.5em;
 	border-radius: 10px;
@@ -53,21 +38,38 @@ body {
 	-o-border-radius: 10px;
 	-webkit-border-radius: 10px;
 	border: 1px solid gray;
+	box-sizing: border-box;
+	padding: 20px;
 }
-.result {
-	margin-right: auto;
-	margin-left: auto;
-	width: 70%;
-	background-color: white;
-	margin-top: 20%;
-	font-size: 2em;
-	border-radius: 10px;
-	-moz-border-radius: 10px;
-	-o-border-radius: 10px;
-	-webkit-border-radius: 10px;
-	border: 1px solid gray;
-	min-height: 30%;
-	padding: 30px;
+#fuelGauge {
+	width: 100%;
+	height:100%;
+}
+#fuelStatus {
+	z-index:-1;
+	background-color: #90E050;
+	border-right: 1px solid #006600;
+	width: 62px;
+	height: 100%;
+	margin-left: 5px;
+	border-radius: 13px;
+	-moz-border-radius: 13px;
+	-o-border-radius: 13px;
+	-webkit-border-radius: 13px;
+}
+#fuel {
+	position: relative;
+	width: 69px;
+	height: 259px;
+	float: left;
+	margin-left: 5%;
+	margin-top: 12%;
+}
+#fuelGaugeImage {
+	background: url('images/mittaribg.png') no-repeat;
+	width: 69px;
+	height: 259px;
+	position: absolute;
 }
 .answerOption {
 	font-size:80%;
@@ -90,13 +92,10 @@ body {
 	box-sizing: border-box;
 	padding: 20px 10px 10px 20px;
 }
-.question {
-	width: 100%;
-	height: 83px;
+#question {
 	background-color: white;
 	border-bottom: 1px solid #cfcfcf;
 	box-sizing: border-box;
-	padding: 20px 10px 10px 20px;
 	color: #00315a;
 	font-weight: bold;
 }
@@ -108,15 +107,65 @@ body {
 	padding: 5px;
 	background-color: #52a600;
 }
-.startGame {
-	background-image: url('images/start.png');
-	width: 458px;
-	min-height: 141px;
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: 20%;
-	display: block;
-}
 h1, h2 {
 	color: #0d3353;
 }
+#kojelauta {
+	background-image: url('images/mittaristo.png');
+	background-repeat: no-repeat;
+	width: 851px;
+	margin-left: auto;
+	margin-right: auto;
+	min-height: 184px;
+	position: fixed;
+	bottom: 0;
+	z-index: -9999;
+}
+#dashboard {
+	width: 100%;
+	margin-top: 95px;
+}
+#speed {
+	color: white;
+	margin-left: 151px;
+	width: 75px;
+	font-size: 1.7em;
+	float: left;
+}
+#tripGauge {
+	color: white;
+	margin-left: 151px;
+	width: 125px;
+	float: left;
+	clear: both;
+	font-size: 0.6em;
+	margin-top: -5px;
+}
+#fuelConsumption {
+	color: white;
+	margin-right: 150px;
+	font-size: 1.6em;
+	float: right;
+	width: 145px;
+}
+.litra {
+	color: #777777;
+}
+#resultScreen {
+	margin-top:12%;
+}
+.result {
+	margin-right: auto;
+	margin-left: auto;
+	width: 70%;
+	background-color: white;
+	font-size: 2em;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-o-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border: 1px solid gray;
+	min-height: 30%;
+	padding: 30px;
+}
+	

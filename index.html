@@ -8,18 +8,27 @@
 	<body>
 
 		<div id="startScreen">
-			<a href="javascript:start();"><div class="startGame"></div></a>
+			<div class="startGame" onclick="start()"></div>
 			<!-- <button id="startButton" onclick="start()">Aloita</button> -->
 		</div>
 
 		<div id="gameScreen">
-			<div class="fuel"></div>
-			<div class="questions">
+			<div id="fuel">
+				<div id="fuelGaugeImage"></div>
+				<div id="fuelGauge">
+					<div id="fuelStatus">100%</div>
+				</div>
+			</div>
+			<div id="questions">
 				<div id="question"></div>
 				<div id="answerOptions"></div>
-			</div>
-			<div id="fuelGauge">
-				<div id="fuelStatus">100%</div>
+				<div id="kojelauta">
+					<div id="dashboard">
+						<div id="speed">100</div>
+						<div id="fuelConsumption"><img src="images/gasOut.png"><span id="fuelConsumptionStatus">10.00</span> <span class="litra">l</span></div>
+					</div>
+					<div id="tripGauge">Kuljettu: <span id="trip">0</span>m</div>
+				</div>
 			</div>
 		</div>
 
@@ -48,6 +57,7 @@
 				this.fuelConsumption;
 				this.trip;
 				this.speed;
+				this.avaFuelConsuption;
 
 				this.startGame = startGame;
 				this.watchTime = watchTime;
@@ -57,15 +67,16 @@
 				this.showStartScreen = showStartScreen;
 				this.showGameScreen = showGameScreen;
 				this.showResultScreen = showResultScreen;
+				this.fuelConsumption = updateFuelConsumption;
 
 				function startGame() {
 					showGameScreen();
 					questNum = -1;
 					correctAnswers = 0;
-					fuel = 100;
+					fuel = 5;
 					speed = 3.333333;
 					//fuelConsumption = 10/100000*this.speed;
-					fuelConsumption = 0.1;
+					fuelConsumption = 10;
 					score = 0;
 					trip = 0;
 					timer=self.setInterval(function(){watchTime()},100);
@@ -78,32 +89,43 @@
 				}
 
 				function watchTime() {
-					this.fuel-=fuelConsumption;
+					this.fuel-=fuelConsumption/10000*speed;
 					updateFuel();
 					if (fuel < 0) {
 						endGame();
 					}
 					this.trip+=this.speed;
+					updateTrip();
 				}
 
 				function checkAnswer(playerAnswer, rightAnswer) {
 					if (playerAnswer == rightAnswer) {
 						correctAnswers++;
 						score+=100;
-						fuelConsumption-=0.01;
+						fuelConsumption-=0.5;
 						//moreFuel();
 					} else {
-						fuelConsumption+=0.25;
+						fuelConsumption+=0.5;
 						//reduceFuel();
 					}
 					console.log("kulutus: "+fuelConsumption);
 					updateFuel();
+					updateFuelConsumption();
 					var end = (fuel < 0) ? endGame() : getQuestion();
 				}
 
+				function updateTrip() {
+					$("#trip").text(this.trip.toFixed(0));
+				}
+
+				function updateFuelConsumption() {
+					$("#fuelConsumptionStatus").text(this.fuelConsumption.toFixed(2));
+				}
+
 				function updateFuel() {
-					$("#fuelStatus").text(this.fuel.toFixed(2)+'%');
-					$("#fuelGauge").css("height", this.fuel);
+					var fuelStatus = (this.fuel/5)*100;
+					$("#fuelStatus").text(fuelStatus.toFixed(2)+'%');
+					$("#fuelGauge").css("height", fuelStatus+'%');
 				}
 
 				function moreFuel() {
@@ -138,10 +160,12 @@
 				}
 
 				function endGame() {
+					this.avaFuelConsuption = (5-this.fuel)/this.trip*10000;
+					
 					$("#resultScreen").empty();
 					showResultScreen();
-					$("#resultScreen").append('<div class="result">Matka: '+this.trip.toFixed(2)+' metriä</div>');
-					$("#resultScreen").append('<a href="javascript:start()"><div class="startGame"></div></a>');
+					$("#resultScreen").append('<div class="result">Matka: '+this.trip.toFixed(2)+' metriä,<br/>Kulutus: '+this.avaFuelConsuption.toFixed(2)+'l/100km</div>');
+					$("#resultScreen").append('<div class="startGame" onclick="start()"></div>');
 					timer=window.clearInterval(timer);
 				}
 
