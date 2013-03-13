@@ -1,0 +1,176 @@
+html {
+	width: 100%;
+	height:100%;
+}
+body {
+	background-image: url('../img/bg.png');
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	font-family: Candara;
+}
+@font-face {
+	font-family: 'Candara';
+	src: url('fonts/candara-webfont.eot'); 
+	src: url('fonts/candara-webfont.eot?#iefix') format('embedded-opentype'),
+	     url('fonts/candara-webfont.woff') format('woff'),
+	     url('fonts/candara-webfont.ttf')  format('truetype'),
+	     url('fonts/candara-webfont.svg#svgcandara') format('svg');
+}
+#startScreen {
+	margin-top:12%;
+}
+.startGame {
+	background-image: url('../img/start.png');
+	width: 458px;
+	min-height: 141px;
+	margin-left: 33%;
+}
+#questions {
+	float: right;
+	margin-right: 20%;
+	width: 60%;
+	background-color: white;
+	margin-top: 12%;
+	margin-bottom: 40px;
+	font-size: 1.5em;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-o-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border: 1px solid gray;
+	box-sizing: border-box;
+	padding: 20px;
+}
+#fuelGauge {
+	width: 100%;
+	height:100%;
+}
+#fuelStatus {
+	z-index:-1;
+	background-color: #90E050;
+	border-right: 1px solid #006600;
+	width: 63px;
+	height: 100%;
+	margin-left: 4px;
+	border-radius: 13px;
+	-moz-border-radius: 13px;
+	-o-border-radius: 13px;
+	-webkit-border-radius: 13px;
+    /*display: table-cell;*/
+}
+/*#fuelStatus > div {
+    display: inline-block;
+    vertical-align: bottom;
+}*/
+#fuel {
+	position: relative;
+	width: 69px;
+	height: 259px;
+	float: left;
+	margin-left: 5%;
+	margin-top: 12%;
+}
+#fuelGaugeImage {
+	background: url('../img/mittaribg.png') no-repeat;
+	width: 69px;
+	height: 259px;
+	position: absolute;
+}
+.answerOption {
+	font-size:80%;
+	background-image: linear-gradient(bottom, rgb(242,242,242) 11%, rgb(240,240,240) 100%, rgb(255,255,255) 78%);
+	background-image: -o-linear-gradient(bottom, rgb(242,242,242) 11%, rgb(240,240,240) 100%, rgb(255,255,255) 78%);
+	background-image: -moz-linear-gradient(bottom, rgb(242,242,242) 11%, rgb(240,240,240) 100%, rgb(255,255,255) 78%);
+	background-image: -webkit-linear-gradient(bottom, rgb(242,242,242) 11%, rgb(240,240,240) 100%, rgb(255,255,255) 78%);
+	background-image: -ms-linear-gradient(bottom, rgb(242,242,242) 11%, rgb(240,240,240) 100%, rgb(255,255,255) 78%);
+
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0.11, rgb(242,242,242)),
+		color-stop(1, rgb(240,240,240)),
+		color-stop(0.78, rgb(255,255,255))
+	);
+
+	border-bottom: 1px solid #cfcfcf;
+	box-sizing: border-box;
+	padding: 20px 10px 10px 20px;
+}
+#question {
+	background-color: white;
+	border-bottom: 1px solid #cfcfcf;
+	box-sizing: border-box;
+	color: #00315a;
+	font-weight: bold;
+}
+.aika {
+	height: 1px;
+	width: 100%;
+	box-sizing: border-box;
+	margin-top: 2px;
+	padding: 5px;
+	background-color: #52a600;
+}
+h1, h2 {
+	color: #0d3353;
+}
+#dashboardWrap {
+	background-image: url('../img/mittaristo.png');
+	background-repeat: no-repeat;
+	width: 851px;
+	margin-left: auto;
+	margin-right: auto;
+	min-height: 184px;
+	position: fixed;
+	bottom: 0;
+	z-index: -9999;
+}
+#dashboard {
+	width: 100%;
+	margin-top: 95px;
+}
+#speed {
+	color: white;
+	margin-left: 151px;
+	width: 75px;
+	font-size: 1.7em;
+	float: left;
+}
+#tripGauge {
+	color: white;
+	margin-left: 151px;
+	width: 125px;
+	float: left;
+	clear: both;
+	font-size: 0.6em;
+	margin-top: -5px;
+}
+#fuelConsumption {
+	color: white;
+	margin-right: 150px;
+	font-size: 1.6em;
+	float: right;
+	/*width: 145px;*/
+}
+.litra {
+	color: #777777;
+}
+#resultScreen {
+	margin-top:12%;
+}
+.whiteBox {
+	margin-right: auto;
+	margin-left: auto;
+	width: 70%;
+	background-color: white;
+	font-size: 2em;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-o-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border: 1px solid gray;
+	min-height: 30%;
+	padding: 30px;
+}
+

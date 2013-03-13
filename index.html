@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
-	<head>
+	<head lang="fi">
 		<meta charset="utf-8" />
 		<title>Ajatko taloudellisesti?</title>
-		<link rel="stylesheet" href="style.css" />
+		<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css"/>
+		<link rel="stylesheet" href="css/style.css" type="text/css"/>
 	</head>
 	<body>
 
@@ -28,7 +29,7 @@
 						<div id="speed">120</div>
 						<div id="fuelConsumption">
 							<span id="fuelEmptyImage">
-								<img src="images/fuel.png" />
+								<img src="img/fuel.png" />
 							</span>
 							<span id="fuelConsumptionStatus">10.00</span> <span class="litra">l</span>
 						</div>
@@ -39,6 +40,72 @@
 		</div>
 
 		<div id="resultScreen"></div>
+
+		<div id="feedback">
+			<h1>Palaute</h1>
+			<h4 class="text-error">Täytä lomake niin saat tietää tuloksesi!</h4>
+			<form class="form-horizontal">
+
+				<div class="control-group">
+					Kumpi on mielestäsi tärkeämpi ottaa huomioon autoa valitessa?<br />
+					<label class="radio">
+						<input type="radio" name="kumpiTarkeampi" value="polttoaineenKulutus">Polttoaineen kulutus
+					</label>
+					<label class="radio">
+						<input type="radio" name="kumpiTarkeampi" value="ymparistoYstavallisyys">Ympäristöystävällisyyteen
+					</label>
+				</div>
+
+				<div class="control-group">
+					Kiinnitätkö autoa valitessasi huomiota<br />
+					<label class="checkbox">
+						<input type="checkbox" name="mihinKiinnitatHuomiota" value="kulutus">Kulutukseen
+					</label>
+					<label class="checkbox">				
+						<input type="checkbox" name="mihinKiinnitatHuomiota" value="moottorinTilavuus">Moottorin tilavuuteen
+					</label>
+					<label class="checkbox">
+						<input type="checkbox" name="mihinKiinnitatHuomiota" value="autonKoko">Auton kokoon
+					</label>
+					<label class="checkbox">
+						<input type="checkbox" name="mihinKiinnitatHuomiota" value="muu">Muu: <input type="text" name="user">
+					</label>
+				</div>
+
+				<div class="control-group">
+					Mitä polttoainetta tulisi mielestäsi tulevaisuudessa kehittää ja käyttää yksityisautoissa?<br />
+					<label class="radio">
+						<input type="radio" name="tulevaisuudenPolttoaine" value="bensiini">Bensiini
+					</label>
+					<label class="radio">
+						<input type="radio" name="tulevaisuudenPolttoaine" value="benEta">Bensiini + Etanoli
+					</label>
+					<label class="radio">
+						<input type="radio" name="tulevaisuudenPolttoaine" value="diesel">Diesel
+					</label>
+					<label class="radio">
+						<input type="radio" name="tulevaisuudenPolttoaine" value="sahko">Sähkö
+					</label>
+					<label class="radio">
+						<input type="radio" name="tulevaisuudenPolttoaine" value="maakaasu">Maakaasu
+					</label>
+					<label class="radio">
+						<input type="radio" name="tulevaisuudenPolttoaine" value="biopolttoaineet">Biopolttoaineet
+					</label>
+					<label class="radio">
+						<input type="radio" name="tulevaisuudenPolttoaine" value="muu">Muu:  <input type="text" name="user">
+					</label>
+				</div>
+
+				<div class="control-group">
+					Millä tavalla ihmisten tulisi mielestäsi tulevaisuudessa liikkua pitkiä matkoja?<br />
+					<textarea name="longWay"></textarea>
+				</div>
+				
+				<button type="submit" class="btn btn-primary">Lähetä</button>
+				<button type="button" class="btn btn-danger">Olen jo lähettänyt</button>
+			</form>
+		</div>
 
 		<script src="js/jquery.min.js"></script>
 		<script type="text/javascript">
@@ -134,13 +201,13 @@
 
 					if (fuelStatus >= 50) {
 						$("#fuelStatus").css('background-color', '#90E050');
-						$("#fuelEmptyImage").html('<img src="images/fuel.png" />');
+						$("#fuelEmptyImage").html('<img src="img/fuel.png" />');
 					} else if (fuelStatus < 50 && fuelStatus > 15){
 						$("#fuelStatus").css('background-color', 'yellow');
-						$("#fuelEmptyImage").html('<img src="images/fuel.png" />');
+						$("#fuelEmptyImage").html('<img src="img/fuel.png" />');
 					} else if (fuelStatus < 15) {
 						$("#fuelStatus").css('background-color', 'red');
-						$("#fuelEmptyImage").html('<img src="images/fuelEmpty.png" />');
+						$("#fuelEmptyImage").html('<img src="img/fuelEmpty.png" />');
 					}
 				}
 
