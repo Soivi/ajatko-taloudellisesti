@@ -50,16 +50,6 @@
 		"rightAnswer": "Kylmistä renkaista"
 	},
 	{
-		"question":"Turvallinen ajokäyttäytyminen saavutetaan?",
-		"answerOptions":
-		[
-		{"option": "Ennakoimalla muiden ohittamista"},
-		{"option": "Ylinopeuden ajamista tasaisella nopeudella"},
-		{"option": "Stressiä ja aggressiivisuutta vähentämällä"}
-		],
-		"rightAnswer": "Stressiä ja aggressiivisuutta vähentämällä"
-	},
-	{
 		"question":"Kylmän moottorin esilämmitys tulisi aloittaa jo?",
 		"answerOptions":
 		[
@@ -73,21 +63,21 @@
 		"question":"Kiihdyttäessäsi tulisi vaihtaa isommalle vaihteelle kun kierrokset ovat?",
 		"answerOptions":
 		[
-		{"option": "2000-2500 kierrosta minuutissa"},
-		{"option": "3000-3500 kierrosta minuutissa"},
-		{"option": "4000-4500 kierrosta minuutissa"}
+		{"option": "Noin 2000-2500 kierrosta minuutissa"},
+		{"option": "Noin 3000-3500 kierrosta minuutissa"},
+		{"option": "Noin 4000-4500 kierrosta minuutissa"}
 		],
-		"rightAnswer": "2000-2500 kierrosta minuutissa"
+		"rightAnswer": "Noin 2000-2500 kierrosta minuutissa"
 	},
 	{
 		"question":"Hidastaessasi vauhtia taloudellisinta on?",
 		"answerOptions":
 		[
 		{"option": "Painaa jarrua ja laittaa vaihde vapaalle"},
-		{"option": "Vapauttaa kaasupoljin (moorrorijarruttaa)"},
+		{"option": "Vapauttaa kaasupoljin hyvissä ajoin (moorrorijarruttaa)"},
 		{"option": "Painaa jarrua ja painaa kytkimen pohjaan"}
 		],
-		"rightAnswer": "Vapauttaa kaasupoljin (moorrorijarruttaa)"
+		"rightAnswer": "Vapauttaa kaasupoljin hyvissä ajoin (moorrorijarruttaa)"
 	},
 	{
 		"question":"Kuinka paljon 100kg ylimääräinen kuorma lisää polttoaineen kulutusta?",
@@ -144,20 +134,50 @@
 		"answerOptions":
 		[
 		{"option": "Turhien kiihdytysten lisääminen"},
-		{"option": "Katsomalla kauas menosuuntaan"},
+		{"option": "Reagoiminen hyvissä ajoin edessä oleviin tilanteisiin"},
 		{"option": "Alle 2 sekunnin välimatkan pitäminen edessä ajavaan"}
 		],
-		"rightAnswer": "Katsomalla kauas menosuuntaan"
+		"rightAnswer": "Reagoiminen hyvissä ajoin edessä oleviin tilanteisiin"
 	},
 	{
 		"question":"Taloudellista ajamista on?",
 		"answerOptions":
 		[
-		{"option": "Mietit ajoreittisi ennen ajamaan lähtemistä"},
+		{"option": "Vältät tarpeettomat pysähdykset hidastamalla ajoissa"},
 		{"option": "Mahdollisimman pienillä vaihteilla ajaminen ylämäessä"},
 		{"option": "Mahdollisimman hitaasti kiihdyttäminen tavoite nopeuteen"}
 		],
-		"rightAnswer": "Mietit ajoreittisi ennen ajamaan lähtemistä"
+		"rightAnswer": "Vältät tarpeettomat pysähdykset hidastamalla ajoissa"
+	},
+	{
+		"question":"Minkä vuoksi Neste Pro diesel kestää pakkasta muita dieseleitä paremmin?",
+		"answerOptions":
+		[
+		{"option": "Matalan samepisteen vuoksi"},
+		{"option": "Lisäaineiden vuoksi"},
+		{"option": "Korkean setaaniluvun vuoksi"}
+		],
+		"rightAnswer": "Matalan samepisteen vuoksi"
+	},
+	{
+		"question":"Millä polttoaineella voidaan vähentää CO2 päästöjä 10-20%?",
+		"answerOptions":
+		[
+		{"option": "E10 bensiini"},
+		{"option": "Neste Pro Diesel"},
+		{"option": "Talvidiesel"}
+		],
+		"rightAnswer": "Neste Pro Diesel"
+	},
+	{
+		"question":"Miksi Neste Pro Diesel laskee polttoaineen kulutusta?",
+		"answerOptions":
+		[
+		{"option": "Hyvien kylmäominaisuuksien vuoksi"},
+		{"option": "Korkean setaaniluvun vuoksi"},
+		{"option": "Matalan tuhkapitoisuuden vuoksi"}
+		],
+		"rightAnswer": "Korkean setaaniluvun vuoksi"
 	},
 	{
 		"question":"Taloudellisinta on kiihdyttää tavoitenopeuteen?",
@@ -169,6 +189,4 @@
 		],
 		"rightAnswer": "Reippaasti kiihdyttämällä"
 	}
-
-	
 ]
