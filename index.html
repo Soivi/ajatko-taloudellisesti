@@ -41,73 +41,81 @@
 
 		<div id="resultScreen"></div>
 
-		<div id="feedback">
-			<h1>Palaute</h1>
-			<h4 class="text-error">Täytä lomake niin saat tietää tuloksesi!</h4>
-			<form class="form-horizontal">
+		<div id="feedback" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" data-backdrop="static">
+			<div class="modal-header">
+				<h1>Palaute</h1>
+				<h4 class="text-error">Täytä lomake niin saat tietää tuloksesi!</h4>
+			</div>
+			<div class="modal-body">
+				<form class="form-horizontal">
 
-				<div class="control-group">
-					Kumpi on mielestäsi tärkeämpi ottaa huomioon autoa valitessa?<br />
-					<label class="radio">
-						<input type="radio" name="kumpiTarkeampi" value="polttoaineenKulutus">Polttoaineen kulutus
-					</label>
-					<label class="radio">
-						<input type="radio" name="kumpiTarkeampi" value="ymparistoYstavallisyys">Ympäristöystävällisyyteen
-					</label>
-				</div>
+					<div class="control-group">
+						Kumpi on mielestäsi tärkeämpi ottaa huomioon autoa valitessa?<br />
+						<label class="radio">
+							<input type="radio" name="question1" value="fuelConsumption">Polttoaineen kulutus
+						</label>
+						<label class="radio">
+							<input type="radio" name="question1" value="environment">Ympäristöystävällisyyteen
+						</label>
+					</div>
 
-				<div class="control-group">
-					Kiinnitätkö autoa valitessasi huomiota<br />
-					<label class="checkbox">
-						<input type="checkbox" name="mihinKiinnitatHuomiota" value="kulutus">Kulutukseen
-					</label>
-					<label class="checkbox">				
-						<input type="checkbox" name="mihinKiinnitatHuomiota" value="moottorinTilavuus">Moottorin tilavuuteen
-					</label>
-					<label class="checkbox">
-						<input type="checkbox" name="mihinKiinnitatHuomiota" value="autonKoko">Auton kokoon
-					</label>
-					<label class="checkbox">
-						<input type="checkbox" name="mihinKiinnitatHuomiota" value="muu">Muu: <input type="text" name="user">
-					</label>
-				</div>
+					<div class="control-group">
+						Kiinnitätkö autoa valitessasi huomiota<br />
+						<label class="checkbox">
+							<input type="checkbox" name="question2" value="consuption">Kulutukseen
+						</label>
+						<label class="checkbox">				
+							<input type="checkbox" name="question2" value="sizeOfEnfine">Moottorin tilavuuteen
+						</label>
+						<label class="checkbox">
+							<input type="checkbox" name="question2" value="carSize">Auton kokoon
+						</label>
+						<label class="checkbox">
+							<input type="checkbox" name="question2" value="other">Muu: <input type="text" name="q2user">
+						</label>
+					</div>
 
-				<div class="control-group">
-					Mitä polttoainetta tulisi mielestäsi tulevaisuudessa kehittää ja käyttää yksityisautoissa?<br />
-					<label class="radio">
-						<input type="radio" name="tulevaisuudenPolttoaine" value="bensiini">Bensiini
-					</label>
-					<label class="radio">
-						<input type="radio" name="tulevaisuudenPolttoaine" value="benEta">Bensiini + Etanoli
-					</label>
-					<label class="radio">
-						<input type="radio" name="tulevaisuudenPolttoaine" value="diesel">Diesel
-					</label>
-					<label class="radio">
-						<input type="radio" name="tulevaisuudenPolttoaine" value="sahko">Sähkö
-					</label>
-					<label class="radio">
-						<input type="radio" name="tulevaisuudenPolttoaine" value="maakaasu">Maakaasu
-					</label>
-					<label class="radio">
-						<input type="radio" name="tulevaisuudenPolttoaine" value="biopolttoaineet">Biopolttoaineet
-					</label>
-					<label class="radio">
-						<input type="radio" name="tulevaisuudenPolttoaine" value="muu">Muu:  <input type="text" name="user">
-					</label>
-				</div>
+					<div class="control-group">
+						Mitä polttoainetta tulisi mielestäsi tulevaisuudessa kehittää ja käyttää yksityisautoissa?<br />
+						<label class="radio">
+							<input type="radio" name="question3" value="fuel">Bensiini
+						</label>
+						<label class="radio">
+							<input type="radio" name="question3" value="fuelEth">Bensiini + Etanoli
+						</label>
+						<label class="radio">
+							<input type="radio" name="question3" value="diesel">Diesel
+						</label>
+						<label class="radio">
+							<input type="radio" name="question3" value="electricity">Sähkö
+						</label>
+						<label class="radio">
+							<input type="radio" name="question3" value="gas">Maakaasu
+						</label>
+						<label class="radio">
+							<input type="radio" name="question3" value="bioFuel">Biopolttoaineet
+						</label>
+						<label class="radio">
+							<input type="radio" name="question3" value="other">Muu: <input type="text" name="q3user">
+						</label>
+					</div>
 
-				<div class="control-group">
-					Millä tavalla ihmisten tulisi mielestäsi tulevaisuudessa liikkua pitkiä matkoja?<br />
-					<textarea name="longWay"></textarea>
-				</div>
-				
+					<div class="control-group">
+						Millä tavalla ihmisten tulisi mielestäsi tulevaisuudessa liikkua pitkiä matkoja?<br />
+						<textarea name="longWay"></textarea>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+				<button class="btn btn-primary">Save changes</button>
 				<button type="submit" class="btn btn-primary">Lähetä</button>
 				<button type="button" class="btn btn-danger">Olen jo lähettänyt</button>
-			</form>
+			</div>
 		</div>
 
 		<script src="js/jquery.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
 		<script type="text/javascript">
 			var game;
 
@@ -146,8 +154,8 @@
 					showGameScreen();
 					questNum = -1;
 					correctAnswers = 0;
-					fuel = 5;
-					speed =3.333333;
+					fuel = 1;
+					speed =7.333333;
 					fuelConsumption = 10;
 					score = 0;
 					trip = 0;
@@ -239,15 +247,36 @@
 				function showResultScreen() {
 					$("#startScreen").hide();
 					$("#gameScreen").hide();
+					$("#feedback").modal("show");
 					$("#resultScreen").show();
 				}
 
 				function endGame() {
 					this.avaFuelConsuption = (5-this.fuel)/this.trip*10000;
 					var tripFuelConsuption = (5-this.fuel)/10;
+					var bonusMeters = 10000/(avaFuelConsuption/this.fuel);
+					if(bonusMeters<=0) {
+						bonusMeters = 0;
+					}
+					var totalMeters = this.trip+bonusMeters;
+					var yourDefinition;
+					if (this.avaFuelConsuption < 7){
+						yourDefinition = 'Erinomainen';
+					} else if (this.avaFuelConsuption < 9){
+						yourDefinition = 'Hyvä';
+					} else if (this.avaFuelConsuption < 11){
+						yourDefinition = 'Normaali';
+					} else if (this.avaFuelConsuption < 13){
+						yourDefinition = 'Kohtalainen';
+					} else if (this.avaFuelConsuption < 15){
+						yourDefinition = 'Huono';
+					} else {
+						yourDefinition = 'Surkea';
+					}				
+
 					$("#resultScreen").empty();
 					showResultScreen();
-					$("#resultScreen").append('<div class="whiteBox">Matka: '+this.trip.toFixed(2)+' metriä,<br/>Keskikulutus: '+this.avaFuelConsuption.toFixed(2)+'l/100km<br />Bensiiniä kului: '+tripFuelConsuption.toFixed(2)+'l</div>');
+					$("#resultScreen").append('<div class="whiteBox">Matka: '+this.trip.toFixed(2)+' metriä<br/>Bensiiniä kului: '+tripFuelConsuption.toFixed(2)+'l<br />Keskikulutus: '+this.avaFuelConsuption.toFixed(2)+'l/100km<br />Lopuilla bensoilla voit ajaa vielä: '+bonusMeters.toFixed(2)+' metriä<br />Matkasi yhteensä: '+totalMeters.toFixed(2)+' metriä<br />Suorituksesi oli: '+yourDefinition+'</div>');
 					$("#resultScreen").append('<div class="startGame" onclick="start()"></div>');
 					timer=window.clearInterval(timer);
 				}
