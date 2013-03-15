@@ -9,7 +9,7 @@
 	<body>
 
 		<div id="startScreen">
-			<div class="whiteBox" style="font-size:100%;">Pelin ideanan on vastata taloudelliseen ajamiseen liittyviin kysymyksiin. Jokaisesta oikeasta vastauksesta vähennät kulutustasi, ja jokaisesta väärästä vastauksesta taas nostatat sitä. Pelissä ajat 100km/h, ja keskikulutuksesi pelin alussa on 10l/100km</div>
+			<div class="whiteBox" style="font-size:100%;">Pelin tarkoituksena on vastata oikein taloudellisuuteen liittyvissä kysymyksissä. Ajat autollasi 120 km/h, sinulla on 0.5 litraa bensiiniä tankissa ja keskikulutuksesi on 10 litraa / 100 km. Jokaisesta oikeasta vastauksesta vähennämme kulutustasin. Selvitä kuinka taloudellinen ajaja olet ja kuinka pitkälle selviät!</div>
 			<div class="startGame" onclick="start()"></div>
 			<!-- <button id="startButton" onclick="start()">Aloita</button> -->
 		</div>
@@ -41,76 +41,97 @@
 
 		<div id="resultScreen"></div>
 
-		<div id="feedback" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" data-backdrop="static">
+		<div id="feedback" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
 			<div class="modal-header">
 				<h1>Palaute</h1>
-				<h4 class="text-error">Täytä lomake niin saat tietää tuloksesi!</h4>
+				<h4 class="text-error">Täytä lomake, jotta tuloksesi tallentuu!</h4>
 			</div>
 			<div class="modal-body">
-				<form class="form-horizontal">
+				<form class="form-horizontal" name="feedbackForm" action="response_normal.php" method="post" onsubmit="xmlhttpPost('http://protola.fi/konseptit/ajatko-taloudellisesti/postFeedback.php', 'feedbackForm', 'MyResult'); return false;">
 
 					<div class="control-group">
-						Kumpi on mielestäsi tärkeämpi ottaa huomioon autoa valitessa?<br />
+							<label class="control-label">Etunimi</label>
+							<label class="controls">
+								<input type="text" id="name" name="name" placeholder="Etunimi"/>
+							</label>
+					</div>
+
+					<div class="control-group">
+							<label class="control-label">Sukunimi</label>
+							<label class="controls">
+								<input type="text" id="lastname" name="lastname" placeholder="Sukunimi" />
+							</label>
+					</div>
+
+					<div class="control-group">
+							<label class="control-label">Puhelinnumero</label>
+							<label class="controls">
+								<input type="text" id="phonenumber" name="phonenumber" placeholder="Puhelinnumero" />
+							</label>
+					</div>
+
+					<hr />
+
+					<div class="control-group">
+						<label>Kumpi on mielestäsi tärkeämpi ottaa huomioon autoa valitessa?</label>
 						<label class="radio">
-							<input type="radio" name="question1" value="fuelConsumption">Polttoaineen kulutus
+							<input type="radio" name="question1" value="fuelConsumption" />Polttoaineen kulutus
 						</label>
 						<label class="radio">
-							<input type="radio" name="question1" value="environment">Ympäristöystävällisyyteen
+							<input type="radio" name="question1" value="environment" />Ympäristöystävällisyys
 						</label>
 					</div>
 
 					<div class="control-group">
-						Kiinnitätkö autoa valitessasi huomiota<br />
+						<label>Kiinnitätkö autoa valitessasi huomiota</label>
 						<label class="checkbox">
-							<input type="checkbox" name="question2" value="consuption">Kulutukseen
+							<input type="checkbox" name="question2" value="consuption" />Kulutukseen
 						</label>
 						<label class="checkbox">				
-							<input type="checkbox" name="question2" value="sizeOfEnfine">Moottorin tilavuuteen
+							<input type="checkbox" name="question2" value="sizeOfEnfine" />Moottorin tilavuuteen
 						</label>
 						<label class="checkbox">
-							<input type="checkbox" name="question2" value="carSize">Auton kokoon
+							<input type="checkbox" name="question2" value="carSize" />Auton kokoon
 						</label>
 						<label class="checkbox">
-							<input type="checkbox" name="question2" value="other">Muu: <input type="text" name="q2user">
+							Muu: <input type="text" name="q2user" />
 						</label>
 					</div>
 
 					<div class="control-group">
-						Mitä polttoainetta tulisi mielestäsi tulevaisuudessa kehittää ja käyttää yksityisautoissa?<br />
+						<label>Mitä polttoainetta tulisi mielestäsi tulevaisuudessa kehittää ja käyttää yksityisautoissa?</label>
 						<label class="radio">
-							<input type="radio" name="question3" value="fuel">Bensiini
+							<input type="radio" name="question3" value="fuel" />Bensiini
 						</label>
 						<label class="radio">
-							<input type="radio" name="question3" value="fuelEth">Bensiini + Etanoli
+							<input type="radio" name="question3" value="fuelEth" />Bensiini + Etanoli
 						</label>
 						<label class="radio">
-							<input type="radio" name="question3" value="diesel">Diesel
+							<input type="radio" name="question3" value="diesel" />Diesel
 						</label>
 						<label class="radio">
-							<input type="radio" name="question3" value="electricity">Sähkö
+							<input type="radio" name="question3" value="electricity" />Sähkö
 						</label>
 						<label class="radio">
-							<input type="radio" name="question3" value="gas">Maakaasu
+							<input type="radio" name="question3" value="gas" />Maakaasu
 						</label>
 						<label class="radio">
-							<input type="radio" name="question3" value="bioFuel">Biopolttoaineet
+							<input type="radio" name="question3" value="bioFuel" />Biopolttoaineet
 						</label>
 						<label class="radio">
-							<input type="radio" name="question3" value="other">Muu: <input type="text" name="q3user">
+							Muu: <input type="text" name="q3user" />
 						</label>
 					</div>
 
 					<div class="control-group">
-						Millä tavalla ihmisten tulisi mielestäsi tulevaisuudessa liikkua pitkiä matkoja?<br />
+						<label>Millä tavalla ihmisten tulisi mielestäsi tulevaisuudessa liikkua pitkiä matkoja?</label>
 						<textarea name="longWay"></textarea>
 					</div>
 				</form>
 			</div>
 			<div class="modal-footer">
-				<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-				<button class="btn btn-primary">Save changes</button>
-				<button type="submit" class="btn btn-primary">Lähetä</button>
-				<button type="button" class="btn btn-danger">Olen jo lähettänyt</button>
+				<button id="sendFeeback" class="btn btn-primary">Lähetä lomake</button>
+				<button class="btn btn-danger"data-dismiss="modal" aria-hidden="true">Olen jo lähettänyt</button>
 			</div>
 		</div>
 
@@ -126,6 +147,20 @@
 
 			function start() {
 				game.startGame();
+			}
+
+			function sendFeedback() {
+				var firstname = $("input#firstname").val();
+				var lastname = $("input#lastname").val();
+				var phonenumber = $("input#firstname").val();
+				var data = 'firstname='+firstname+'&lastname='+lastname+'&phonenubmer='+phonenumber+'&question1='+question1+'&question2='+question2+'&question3='+question3;
+				$.ajax({
+					type: "POST",
+					url: "http://protola.fi/konseptit/ajatko-taloudellisesti/postFeedback.php",
+					data: data,
+					success: success,
+					dataType: dataType
+				});
 			}
 
 			function Game() {
@@ -178,14 +213,16 @@
 					updateTrip();
 				}
 
-				function checkAnswer(playerAnswer, rightAnswer) {
+				function checkAnswer(playerAnswer, rightAnswer, id) {
 					if (playerAnswer == rightAnswer) {
 						correctAnswers++;
 						score+=100;
 						fuelConsumption-=0.5;
+						$("#question"+id+".answerOption").css('background-color', 'green');
 						//moreFuel();
 					} else {
 						fuelConsumption+=0.5;
+						$("#question"+id+".answerOption").css('background-color', 'red');
 						//reduceFuel();
 					}
 					console.log("kulutus: "+fuelConsumption);
@@ -291,7 +328,7 @@
 
 						// Loop answer options
 						for (a=0;questionFactory.questionsList[this.questNum].answerOptions.length>a;a++) {
-							$("#answerOptions").append('<div class="answerOption" onclick="game.checkAnswer(\''+questionFactory.questionsList[this.questNum].answerOptions[a]+'\', \''+questionFactory.questionsList[this.questNum].rightAnswer+'\')">'+questionFactory.questionsList[this.questNum].answerOptions[a]+'</button>');
+							$("#answerOptions").append('<div id="question'+a+'" class="answerOption" onclick="game.checkAnswer(\''+questionFactory.questionsList[this.questNum].answerOptions[a]+'\', \''+questionFactory.questionsList[this.questNum].rightAnswer+'\', '+a+')">'+questionFactory.questionsList[this.questNum].answerOptions[a]+'</button>');
 						}
 					}
 				}
