@@ -29,7 +29,7 @@
 						<div id="speed">120</div>
 						<div id="fuelConsumption">
 							<span id="fuelEmptyImage">
-								<img src="img/fuel.png" />
+								<img src="img/fuel.png" alt="fuel" />
 							</span>
 							<span id="fuelConsumptionStatus">10.00</span> <span class="litra">l</span>
 						</div>
@@ -41,7 +41,7 @@
 
 		<div id="resultScreen"></div>
 
-		<div id="feedback" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+		<div id="feedback" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
 			<div class="modal-header">
 				<h1>Palaute</h1>
 				<h4 class="text-error">Täytä lomake, jotta tuloksesi tallentuu!</h4>
@@ -131,7 +131,7 @@
 			</div>
 			<div class="modal-footer">
 				<button id="sendFeedback" class="btn btn-primary">Lähetä lomake</button>
-				<button class="btn btn-danger"data-dismiss="modal" aria-hidden="true">Olen jo lähettänyt</button>
+				<button class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Olen jo lähettänyt</button>
 			</div>
 		</div>
 
@@ -210,11 +210,11 @@
 						correctAnswers++;
 						score+=100;
 						fuelConsumption-=0.5;
-						$("#question"+id+".answerOption").css('background-color', 'green');
+						$("#question"+id+".answerOption").css('color', 'green');
 						//moreFuel();
 					} else {
 						fuelConsumption+=0.5;
-						$("#question"+id+".answerOption").css('background-color', 'red');
+						$("#question"+id+".answerOption").css('color', 'red');
 						//reduceFuel();
 					}
 					updateFuel();
@@ -237,13 +237,13 @@
 
 					if (fuelStatus >= 50) {
 						$("#fuelStatus").css('background-color', '#90E050');
-						$("#fuelEmptyImage").html('<img src="img/fuel.png" />');
+						$("#fuelEmptyImage").html('<img src="img/fuel.png" alt="fuel" />');
 					} else if (fuelStatus < 50 && fuelStatus > 15){
 						$("#fuelStatus").css('background-color', 'yellow');
-						$("#fuelEmptyImage").html('<img src="img/fuel.png" />');
+						$("#fuelEmptyImage").html('<img src="img/fuel.png" alt="fuel" />');
 					} else if (fuelStatus < 15) {
 						$("#fuelStatus").css('background-color', 'red');
-						$("#fuelEmptyImage").html('<img src="img/fuelEmpty.png" />');
+						$("#fuelEmptyImage").html('<img src="img/fuelEmpty.png" alt="fuelEmpty" />');
 					}
 				}
 
@@ -340,14 +340,15 @@
 					}
 					var q4travel = $("textarea#travelLongWay").val();
 
-					var data = 'firstname='+encodeURIComponent(firstname)+'&lastname='+encodeURIComponent(lastname)+'&phonenubmer='+encodeURIComponent(phonenumber)+'&question1='+encodeURIComponent(question1)+'&q2consuption='+encodeURIComponent(q2consuption)+'&q2engine='+encodeURIComponent(q2engine)+'&q2other='+encodeURIComponent(q2other)+'&question3='+encodeURIComponent(question3)+'&q4travel='+encodeURIComponent(q4travel)+'&score='+totalMeters.toFixed(2);
+					var data = 'firstname='+encodeURIComponent(firstname)+'&lastname='+encodeURIComponent(lastname)+'&phonenumber='+encodeURIComponent(phonenumber)+'&question1='+encodeURIComponent(question1)+'&q2consuption='+encodeURIComponent(q2consuption)+'&q2engine='+encodeURIComponent(q2engine)+'&q2other='+encodeURIComponent(q2other)+'&question3='+encodeURIComponent(question3)+'&q4travel='+encodeURIComponent(q4travel)+'&score='+totalMeters.toFixed(2);
 					/*$.ajax({
 						type: "POST",
-						url: "http://protola.fi/konseptit/ajatko-taloudellisesti/postFeedback.php",
+						url: "http://protola.fi/konseptit/ajatko-taloudellisesti/nestePostFeedback.php",
 						data: data,
 						success: success,
 						dataType: dataType
 					});*/
+					$.post("http://protola.fi/konseptit/ajatko-taloudellisesti/nestePostFeedback.php", { firstname: encodeURIComponent(firstname), lastname: encodeURIComponent(lastname), phonenumber: encodeURIComponent(phonenumber), question1: encodeURIComponent(question1), q2consuption: encodeURIComponent(q2consuption), q2engine: encodeURIComponent(q2engine), q2other: encodeURIComponent(q2other), question3: encodeURIComponent(question3), q4travel: encodeURIComponent(q4travel), score: totalMeters.toFixed(2) } );
 					saveScore(firstname, lastname);
 					console.log(data);
 				}
