@@ -152,20 +152,19 @@
 		
 		<script src="js/jquery.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
-		<script src="js/cordova-2.5.0.js"></script>
+		
 		<script type="text/javascript">
 			var game;
 
-			/*$(function(){
+			$(function(){
 				game = new Game();
 				game.showStartScreen();
-			});*/
+			});
 
 			document.addEventListener("deviceready", onDeviceReady, false);
 
 			function onDeviceReady() {
-				game = new Game();
-				game.showStartScreen();
+				alert('Cordova');
 			}
 
 
@@ -393,19 +392,6 @@
 						tx.executeSql('CREATE TABLE IF NOT EXISTS highscores (score, firstname, lastname)');
 						tx.executeSql('INSERT INTO highscores (score, firstname, lastname) VALUES (?, ?, ?)', [this.totalMeters, firstname, lastname]);
 					});
-
-					console.log('Save: '+this.totalMeters);
-					console.log('Nimi: '+firstname+', Sukunimi: '+lastname);
-
-					db.transaction(function (tx) {
-						tx.executeSql('SELECT * FROM highscores', [], function (tx, results) {
-						  var len = results.rows.length, i;
-						  for (i = 0; i < len; i++) {
-							 console.log(results.rows.item(i).score+', '+results.rows.item(i).firstname+', '+results.rows.item(i).lastname);
-						  }
-						});
-					});
-					
 				}
 
 			}
