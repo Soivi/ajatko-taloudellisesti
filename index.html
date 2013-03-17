@@ -9,7 +9,7 @@
 	<body>
 
 		<div id="startScreen">
-			<div class="whiteBox" style="font-size:100%;">Pelin tarkoituksena on vastata oikein taloudelliseen ajamiseen liittyvissä kysymyksissä. Ajat autollasi 120 km/h, sinulla on 0.5 litraa bensiiniä tankissa ja keskikulutuksesi on 10 litraa / 100 km. Jokaisesta oikeasta vastauksesta vähennämme hieman keskikulutustasi ja vastaavasti väärästä vastauksesta korotamme sitä. Selvitä kuinka taloudellinen ajaja todellisuudessa olet ja kuinka pitkälle selviät!</div>
+			<div class="whiteBox" style="font-size:100%;">Pelin tarkoituksena on vastata oikein taloudelliseen ajamiseen liittyvissä kysymyksissä. Ajat autollasi 120 km/h, sinulla on 0.5 litraa bensiiniä tankissa ja keskikulutuksesi on 10 litraa / 100 km. Jokaisesta oikeasta vastauksesta vähennämme hieman keskikulutustasi ja vastaavasti väärästä vastauksesta korotamme sitä. Selvitä kuinka taloudellinen ajaja todellisuudessa olet ja kuinka pitkälle selviät!<br /><button class="btn btn-primary" onclick="highscores()">Ennätykset</button></div>
 			<div class="startGame" onclick="start()"></div>
 			<!-- <button id="startButton" onclick="start()">Aloita</button> -->
 		</div>
@@ -138,15 +138,36 @@
 			</div>
 		</div>
 
+		<div id="highScoresModal" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+			<div class="modal-header">
+				<h1>Ennätykset</h1>
+			</div>
+			<div class="modal-body">
+				<div id="highScores"></div>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Poistu</button>
+			</div>
+		</div>
+		
 		<script src="js/jquery.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
+		<script src="js/cordova-2.5.0.js"></script>
 		<script type="text/javascript">
 			var game;
 
-			$(function(){
+			/*$(function(){
 				game = new Game();
 				game.showStartScreen();
-			});
+			});*/
+
+			document.addEventListener("deviceready", onDeviceReady, false);
+
+			function onDeviceReady() {
+				game = new Game();
+				game.showStartScreen();
+			}
+
 
 			function start() {
 				game.startGame();
@@ -366,7 +387,7 @@
 				}
 
 				function saveScore(firstname, lastname) {
-					db = openDatabase('ajatkoTaloudellisesti', '1.0', 'ajatko taloudellisesti -tietokanta', 2 * 1024 * 1024);
+					db = window.openDatabase('ajatkoTaloudellisesti', '1.0', 'ajatko taloudellisesti -tietokanta', 2 * 1024 * 1024);
 					console.log(db);
 					db.transaction(function (tx) {
 						tx.executeSql('CREATE TABLE IF NOT EXISTS highscores (score, firstname, lastname)');
@@ -440,6 +461,37 @@
 					answerOptions = answer;
 				}
 			}
+
+
+		function highscores() {			
+			db = window.openDatabase('ajatkoTaloudellisesti', '1.0', 'ajatko taloudellisesti -tietokanta', 2 * 1024 * 1024);
+			db.transaction(function (tx) {
+				tx.executeSql('SELECT firstname, lastname, score FROM highscores ORDER BY score DESC', [], function (tx, results) {
+					var len = results.rows.length, i;
+					var theTable = document.createElement('table');
+					theTable.id = "highScoreTable";
+					theTable.className = "table table-condensed";
+					for (i = 0; i < len; i++) {
+						tr = document.createElement('tr');
+						tdId = document.createElement('td');
+						tdFirstname = document.createElement('td');
+						tdLastname = document.createElement('td');
+						tdScore = document.createElement('td');
+						tdId.appendChild(document.createTextNode(i+1));
+						tr.appendChild(tdId);
+						tdFirstname.appendChild(document.createTextNode(results.rows.item(i).firstname));
+						tr.appendChild(tdFirstname);
+						tdLastname.appendChild(document.createTextNode(results.rows.item(i).lastname));
+						tr.appendChild(tdLastname);
+						tdScore.appendChild(document.createTextNode(results.rows.item(i).score));
+						tr.appendChild(tdScore);
+						theTable.appendChild(tr);
+					}
+					document.getElementById("highScores").appendChild(theTable);
+				});
+			});
+			$("#highScoresModal").modal("show");
+		}
 		</script>
 	</body>
 </html>
