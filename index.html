@@ -199,7 +199,7 @@
 					startFuel = 0.5; // dl
 					correctAnswers = 0;
 					fuel = startFuel;
-					speed =10.333333; // m/s
+					speed =3.333333; // m/s
 					fuelConsumption = 10; // l/100km
 					score = 0;
 					trip = 0;
@@ -328,7 +328,7 @@
 					$("#resultScreen").empty();
 					showResultScreen();
 					$("#resultScreen").append('<div class="whiteBox">Matka: '+this.trip.toFixed(2)+' metriä<br/>Bensiiniä kului: '+tripFuelConsuption.toFixed(2)+'l<br />Keskikulutus: '+this.avaFuelConsuption.toFixed(2)+'l/100km<br />Lopuilla bensoilla voit ajaa vielä: '+bonusMeters.toFixed(2)+' metriä<br />Matkasi yhteensä: '+totalMeters.toFixed(2)+' metriä<br />Suorituksesi oli: '+yourDefinition+'</div>');
-					$("#resultScreen").append('<div class="startGame" onclick="start()"></div>');
+					$("#resultScreen").append('<div class="startGame" onclick="game.showStartScreen()"></div>');
 					timer=window.clearInterval(timer);
 				}
 
