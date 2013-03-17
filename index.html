@@ -18,11 +18,14 @@
 			<div id="fuel">
 				<div id="fuelGaugeImage"></div>
 				<div id="fuelGauge">
-					<div id="fuelStatus">100%</div>
+					<div style="display : table-row;">
+						<div id="fuelStatus">100%</div>
+					</div>
 				</div>
 			</div>
 			<div id="questions">
 				<div id="question"></div>
+				<div id="correctAndQuestionNumber"></div>
 				<div id="answerOptions"></div>
 				<div id="dashboardWrap">
 					<div id="dashboard">
@@ -47,7 +50,7 @@
 				<h4 class="text-error">Täytä lomake, jotta tuloksesi tallentuu!</h4>
 			</div>
 			<div class="modal-body">
-				<form class="form-horizontal" name="feedbackForm">
+				<form class="form-horizontal" id="feedbackForm" name="feedbackForm">
 
 					<div class="control-group">
 							<label class="control-label">Etunimi</label>
@@ -130,7 +133,7 @@
 				</form>
 			</div>
 			<div class="modal-footer">
-				<button id="sendFeedback" class="btn btn-primary">Lähetä lomake</button>
+				<button id="sendFeedback" class="btn btn-primary" data-dismiss="modal">Lähetä lomake</button>
 				<button class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Olen jo lähettänyt</button>
 			</div>
 		</div>
@@ -154,7 +157,8 @@
 			function Game() {
 				this.db;
 				this.questNum;
-				this.correctAnswer;
+				this.correctAnswers;
+				this.startFuel;
 				this.fuel;
 				this.timer;
 				this.questionFactory;
@@ -175,14 +179,16 @@
 				this.showResultScreen = showResultScreen;
 				this.fuelConsumption = updateFuelConsumption;
 				this.sendFeedback = sendFeedback;
+				this.showFeedbackForm = showFeedbackForm;
 
 				function startGame() {
 					showGameScreen();
 					questNum = -1;
+					startFuel = 0.5; // dl
 					correctAnswers = 0;
-					fuel = 5;
-					speed =3.333333;
-					fuelConsumption = 10;
+					fuel = startFuel;
+					speed =10.333333; // m/s
+					fuelConsumption = 10; // l/100km
 					score = 0;
 					trip = 0;
 					totalMeters = 0;
@@ -231,7 +237,7 @@
 				}
 
 				function updateFuel() {
-					var fuelStatus = (this.fuel/5)*100;
+					var fuelStatus = (this.fuel/this.startFuel)*100;
 					$("#fuelStatus").text(fuelStatus.toFixed(2)+'%');
 					$("#fuelGauge").css("height", fuelStatus+'%');
 
@@ -275,13 +281,18 @@
 				function showResultScreen() {
 					$("#startScreen").hide();
 					$("#gameScreen").hide();
-					$("#feedback").modal("show");
+					showFeedbackForm();
 					$("#resultScreen").show();
 				}
 
+				function showFeedbackForm() {
+					$('#feedbackForm')[0].reset();
+					$("#feedback").modal("show");
+				}
+
 				function endGame() {
-					this.avaFuelConsuption = (5-this.fuel)/this.trip*10000;
-					var tripFuelConsuption = (5-this.fuel)/10;
+					this.avaFuelConsuption = (this.startFuel-this.fuel)/this.trip*10000;
+					var tripFuelConsuption = (this.startFuel-this.fuel)/10;
 					var bonusMeters = 10000/(avaFuelConsuption/this.fuel);
 					if(bonusMeters<=0) {
 						bonusMeters = 0;
@@ -311,7 +322,8 @@
 
 				function getQuestion(){
 					this.questNum++;
-					if (questNum >= questionFactory.questionsList.length) {
+					$("#correctAndQuestionNumber").html("OIKEIN: "+correctAnswers+" / "+this.questNum);
+					if (questNum >= 10) { // Quest 10 questions
 						endGame();
 					} else {
 						$("#answerOptions").empty();
