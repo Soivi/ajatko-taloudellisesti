@@ -152,7 +152,6 @@
 		
 		<script src="js/jquery.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
-		
 		<script type="text/javascript">
 			var game;
 
@@ -160,13 +159,6 @@
 				game = new Game();
 				game.showStartScreen();
 			});
-
-			document.addEventListener("deviceready", onDeviceReady, false);
-
-			function onDeviceReady() {
-				alert('Cordova');
-			}
-
 
 			function start() {
 				game.startGame();
