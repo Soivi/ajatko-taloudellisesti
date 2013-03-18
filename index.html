@@ -18,9 +18,7 @@
 			<div id="fuel">
 				<div id="fuelGaugeImage"></div>
 				<div id="fuelGauge">
-					<div style="display : table-row;">
-						<div id="fuelStatus">100%</div>
-					</div>
+					<div id="fuelStatus">100%</div>
 				</div>
 			</div>
 			<div id="questions">
@@ -63,6 +61,13 @@
 							<label class="control-label">Sukunimi</label>
 							<label class="controls">
 								<input type="text" id="lastname" name="lastname" placeholder="Sukunimi" />
+							</label>
+					</div>
+
+					<div class="control-group">
+							<label class="control-label">Sähköposti</label>
+							<label class="controls">
+								<input type="text" id="email" name="email" placeholder="Sähköposti" />
 							</label>
 					</div>
 
@@ -196,7 +201,7 @@
 				function startGame() {
 					showGameScreen();
 					questNum = -1;
-					startFuel = 0.5; // dl
+					startFuel = 3; // dl
 					correctAnswers = 0;
 					fuel = startFuel;
 					speed =3.333333; // m/s
@@ -211,6 +216,7 @@
 					questionFactory.buildQuestions();
 					questionFactory.scrambleList();
 					getQuestion();
+					updateFuelConsumption();
 				}
 
 				function watchTime() {
@@ -305,21 +311,21 @@
 				function endGame() {
 					this.avaFuelConsuption = (this.startFuel-this.fuel)/this.trip*10000;
 					var tripFuelConsuption = (this.startFuel-this.fuel)/10;
-					var bonusMeters = 10000/(avaFuelConsuption/this.fuel);
+					var bonusMeters = 10000/(this.fuelConsuption/this.fuel);
 					if(bonusMeters<=0) {
 						bonusMeters = 0;
 					}
 					totalMeters = this.trip+bonusMeters;
 					var yourDefinition;
-					if (this.avaFuelConsuption < 7){
+					if (this.fuelConsuption < 7){
 						yourDefinition = 'Erinomainen';
-					} else if (this.avaFuelConsuption < 9){
+					} else if (this.fuelConsuption < 9){
 						yourDefinition = 'Hyvä';
-					} else if (this.avaFuelConsuption < 11){
+					} else if (this.fuelConsuption < 11){
 						yourDefinition = 'Normaali';
-					} else if (this.avaFuelConsuption < 13){
+					} else if (this.fuelConsuption < 13){
 						yourDefinition = 'Kohtalainen';
-					} else if (this.avaFuelConsuption < 15){
+					} else if (this.fuelConsuption < 15){
 						yourDefinition = 'Huono';
 					} else {
 						yourDefinition = 'Surkea';
@@ -351,6 +357,7 @@
 				function sendFeedback() {
 					var firstname = $("input#firstname").val();
 					var lastname = $("input#lastname").val();
+					var email = $("input#email").val();
 					var phonenumber = $("input#phonenumber").val();
 					var question1 = $("input:radio[name=question1]:checked").val();
 					var q2consuption = $("input:checkbox[name=q2consuption]:checked").val();
@@ -364,7 +371,7 @@
 					}
 					var q4travel = $("textarea#travelLongWay").val();
 
-					var data = 'firstname='+encodeURIComponent(firstname)+'&lastname='+encodeURIComponent(lastname)+'&phonenumber='+encodeURIComponent(phonenumber)+'&question1='+encodeURIComponent(question1)+'&q2consuption='+encodeURIComponent(q2consuption)+'&q2engine='+encodeURIComponent(q2engine)+'&q2other='+encodeURIComponent(q2other)+'&question3='+encodeURIComponent(question3)+'&q4travel='+encodeURIComponent(q4travel)+'&score='+totalMeters.toFixed(2);
+					var data = 'firstname='+encodeURIComponent(firstname)+'&lastname='+encodeURIComponent(lastname)+'&email='+encodeURIComponent(email)+'&phonenumber='+encodeURIComponent(phonenumber)+'&question1='+encodeURIComponent(question1)+'&q2consuption='+encodeURIComponent(q2consuption)+'&q2engine='+encodeURIComponent(q2engine)+'&q2other='+encodeURIComponent(q2other)+'&question3='+encodeURIComponent(question3)+'&q4travel='+encodeURIComponent(q4travel)+'&score='+totalMeters.toFixed(2);
 					/*$.ajax({
 						type: "POST",
 						url: "http://protola.fi/konseptit/ajatko-taloudellisesti/nestePostFeedback.php",
@@ -372,7 +379,7 @@
 						success: success,
 						dataType: dataType
 					});*/
-					$.post("http://protola.fi/konseptit/ajatko-taloudellisesti/nestePostFeedback.php", { firstname: encodeURIComponent(firstname), lastname: encodeURIComponent(lastname), phonenumber: encodeURIComponent(phonenumber), question1: encodeURIComponent(question1), q2consuption: encodeURIComponent(q2consuption), q2engine: encodeURIComponent(q2engine), q2other: encodeURIComponent(q2other), question3: encodeURIComponent(question3), q4travel: encodeURIComponent(q4travel), score: totalMeters.toFixed(2) } );
+					$.post("http://protola.fi/konseptit/ajatko-taloudellisesti/nestePostFeedback.php", { firstname: encodeURIComponent(firstname), lastname: encodeURIComponent(lastname), email: encodeURIComponent(email), phonenumber: encodeURIComponent(phonenumber), question1: encodeURIComponent(question1), q2consuption: encodeURIComponent(q2consuption), q2engine: encodeURIComponent(q2engine), q2other: encodeURIComponent(q2other), question3: encodeURIComponent(question3), q4travel: encodeURIComponent(q4travel), score: totalMeters.toFixed(2) } );
 					saveScore(firstname, lastname);
 					console.log(data);
 				}
