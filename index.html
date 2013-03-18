@@ -9,7 +9,7 @@
 	<body>
 
 		<div id="startScreen">
-			<div class="whiteBox" style="font-size:100%;">Pelin tarkoituksena on vastata oikein taloudelliseen ajamiseen liittyvissä kysymyksissä. Ajat autollasi 120 km/h, sinulla on 0.5 litraa bensiiniä tankissa ja keskikulutuksesi on 10 litraa / 100 km. Jokaisesta oikeasta vastauksesta vähennämme hieman keskikulutustasi ja vastaavasti väärästä vastauksesta korotamme sitä. Selvitä kuinka taloudellinen ajaja todellisuudessa olet ja kuinka pitkälle selviät!<br /><button class="btn btn-primary" onclick="highscores()">Ennätykset</button></div>
+			<div class="whiteBox" style="font-size:100%;"><h2>Ohje</h2><br />Pelin tarkoituksena on vastata oikein taloudelliseen ajamiseen liittyvissä kysymyksissä. Ajat autollasi 120 km/h, sinulla on 0.3 litraa bensiiniä tankissa ja keskikulutuksesi on 10 litraa / 100 km. Jokaisesta oikeasta vastauksesta vähennämme hieman keskikulutustasi ja vastaavasti väärästä vastauksesta korotamme sitä. Selvitä kuinka taloudellinen ajaja todellisuudessa olet ja kuinka pitkälle selviät!<br /><h3>Päivittäin arvomme viiden parhaan pelaajan kesken 100 euron lahjakortin!</h3><br /><button class="btn btn-primary" onclick="highscores()">Ennätykset</button></div>
 			<div class="startGame" onclick="start()"></div>
 			<!-- <button id="startButton" onclick="start()">Aloita</button> -->
 		</div>
@@ -201,10 +201,10 @@
 				function startGame() {
 					showGameScreen();
 					questNum = -1;
-					startFuel = 3; // dl
+					startFuel = 0.5; // dl
 					correctAnswers = 0;
 					fuel = startFuel;
-					speed =3.333333; // m/s
+					speed =7.333333; // m/s
 					fuelConsumption = 10; // l/100km
 					score = 0;
 					trip = 0;
@@ -309,23 +309,25 @@
 				}
 
 				function endGame() {
-					this.avaFuelConsuption = (this.startFuel-this.fuel)/this.trip*10000;
-					var tripFuelConsuption = (this.startFuel-this.fuel)/10;
-					var bonusMeters = 10000/(this.fuelConsuption/this.fuel);
+					this.avaFuelConsuption = (startFuel-this.fuel)/this.trip*10000;
+					console.log(startFuel);
+					var tripFuelConsuption = (startFuel-this.fuel)/10;
+					var bonusMeters = 10000/(this.fuelConsumption/this.fuel);
+
 					if(bonusMeters<=0) {
 						bonusMeters = 0;
 					}
 					totalMeters = this.trip+bonusMeters;
 					var yourDefinition;
-					if (this.fuelConsuption < 7){
+					if (this.fuelConsumption < 7){
 						yourDefinition = 'Erinomainen';
-					} else if (this.fuelConsuption < 9){
+					} else if (this.fuelConsumption < 9){
 						yourDefinition = 'Hyvä';
-					} else if (this.fuelConsuption < 11){
+					} else if (this.fuelConsumption < 11){
 						yourDefinition = 'Normaali';
-					} else if (this.fuelConsuption < 13){
+					} else if (this.fuelConsumption < 13){
 						yourDefinition = 'Kohtalainen';
-					} else if (this.fuelConsuption < 15){
+					} else if (this.fuelConsumption < 15){
 						yourDefinition = 'Huono';
 					} else {
 						yourDefinition = 'Surkea';
@@ -468,8 +470,8 @@
 						tr.appendChild(tdFirstname);
 						tdLastname.appendChild(document.createTextNode(results.rows.item(i).lastname));
 						tr.appendChild(tdLastname);
-						tdScore.appendChild(document.createTextNode(results.rows.item(i).score));
-						tr.appendChild(tdScore);
+						//tdScore.appendChild(document.createTextNode(results.rows.item(i).score));
+						//tr.appendChild(tdScore);
 						theTable.appendChild(tr);
 					}
 					document.getElementById("highScores").appendChild(theTable);
