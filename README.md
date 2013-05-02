@@ -7,3 +7,7 @@ Niko Kiuru & Lauri Soivi
 
 Grafiikka:
 Julius Aho <a href="http://julkka.net">http://julkka.net<a/>
+
+Demo-versio: <a href="http://protola.fi/konseptit/ajatko-taloudellisesti/demo/">http://protola.fi/konseptit/ajatko-taloudellisesti/demo/<a/>
+
+Tietokanta taulu: <a href="http://protola.fi/konseptit/ajatko-taloudellisesti/sqlTableCreate.txt">http://protola.fi/konseptit/ajatko-taloudellisesti/sqlTableCreate.txt</a>
