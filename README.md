@@ -4,3 +4,6 @@ Pelin tarkoituksena on vastata oikein taloudelliseen ajamiseen liittyvissä kysy
 
 Tekijät:
 Niko Kiuru & Lauri Soivi
+
+Grafiikka:
+Julius Aho <a href="http://julkka.net">http://julkka.net<a/>
